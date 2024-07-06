@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // MARK: Variables
+    
     @State private var diceType: Dice = .d20
     @State private var diceAmount: Int = 1
     @State private var rollModifier: Int = 0
-    @State private var results: [Result] = []
     @State private var sum: Int = 0
-    @State private var sheetIsVisible: Bool = false
+    @State private var results: [Result] = []
+    @State private var resultsSheetIsVisible: Bool = false
+    
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    // MARK: Body
     
     var body: some View {
         VStack {
@@ -22,12 +28,34 @@ struct ContentView: View {
             diceAmountInput
             rollModifierInput
             sumLabel
-            resultSheet
+            resultsSheet
             rollButton
             inputLabel
         }
         .font(.largeTitle)
+        .padding()
     }
+    
+    // MARK: Flare
+    
+    var flare: some View {
+        RoundedRectangle(cornerRadius: 0)
+            .foregroundStyle(.red)
+            .rotationEffect(.degrees(80))
+            .offset(y: -470)
+    }
+    
+    // MARK: Header
+    
+    var header: some View {
+        Text("Dice!")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .fontDesign(.rounded)
+            .foregroundStyle(adjustColor())
+    }
+    
+    // MARK: Dice Menu
     
     var diceMenu: some View {
         HStack {
@@ -48,42 +76,68 @@ struct ContentView: View {
                 Text(diceType.rawValue)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .gridCellAnchor(.leading)
-                    .foregroundStyle(adjustFontColor())
+                    .foregroundStyle(adjustColor())
                     .onChange(of: diceType, { resetResults() })
                     .padding(.horizontal)
             }
-        }
+        }.padding(.top)
     }
+    
+    // MARK: Dice Amount Input
     
     var diceAmountInput: some View {
         HStack {
-            Image(systemName: "number")
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .imageScale(.large)
-                .foregroundStyle(.red)
+            HStack {
+                Button() {
+                    diceAmount = 1
+                } label: {
+                    Image(systemName: "arrow.clockwise.circle.fill")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .foregroundStyle(.gray)
+                }
+                
+                Image(systemName: "number")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .imageScale(.large)
+                    .foregroundStyle(.red)
+            }
             
             Stepper("\(diceAmount)", value: $diceAmount, in: 1...100)
                 .frame(maxWidth: .infinity)
                 .onChange(of: diceAmount, { resetResults() })
                 .padding(.horizontal)
-        }
-        .padding(.top, 20)
+            
+        }.padding(.top, 20)
     }
+    
+    // MARK: Roll Modifier Input
     
     var rollModifierInput: some View {
         HStack {
-            Image(systemName: "plus.forwardslash.minus")
-                .frame(maxWidth: .infinity, minHeight: 1, alignment: .trailing)
-                .imageScale(.large)
-                .foregroundStyle(.red)
+            HStack {
+                Button() {
+                    rollModifier = 0
+                } label: {
+                    Image(systemName: "arrow.clockwise.circle.fill")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .foregroundStyle(.gray)
+                }
+                
+                Image(systemName: "plus.forwardslash.minus")
+                    .frame(maxWidth: .infinity, minHeight: 1, alignment: .trailing)
+                    .imageScale(.large)
+                    .foregroundStyle(.red)
+            }
             
             Stepper("\(rollModifier)", value: $rollModifier, in: -100...100)
                 .frame(maxWidth: .infinity)
                 .onChange(of: rollModifier, { resetResults() })
                 .padding(.horizontal)
-        }
-        .padding(.top, 30)
+            
+        }.padding(.top, 30)
     }
+    
+    // MARK: Sum Label
     
     var sumLabel: some View {
         HStack {
@@ -95,13 +149,14 @@ struct ContentView: View {
             Text(sum.description)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
-        }
-        .padding(.top, 30)
+        }.padding(.top, 30)
     }
     
-    var resultSheet: some View {
+    // MARK: Results Sheet
+    
+    var resultsSheet: some View {
         Button {
-            sheetIsVisible.toggle()
+            resultsSheetIsVisible.toggle()
         } label: {
             HStack {
                 Image(systemName: "list.number")
@@ -109,55 +164,59 @@ struct ContentView: View {
                     .imageScale(.large)
                     .foregroundStyle(.red)
                 
-                Text("...")
+                Image(systemName: "rectangle.expand.vertical")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundStyle(adjustFontColor())
-                    .padding(.horizontal)
+                    .imageScale(.small)
+                    .foregroundStyle(adjustColor())
+                    .padding(.horizontal, 10)
             }
-        }
-        .sheet(isPresented: $sheetIsVisible, content: {
-            Button() {
-                sheetIsVisible.toggle()
-            } label: {
-                VStack {
-                    Image(systemName: "x.circle.fill")
-                        .foregroundStyle(.red)
-                }
-            }
-            .padding(10)
-            
-            if diceAmount > 0, results.count > 0 {
-                Text(showInputMessage())
-                    .font(.headline)
-                
-                Text("Sum: \(sum)")
-                    .font(.headline)
-                    .padding()
-                
-                Text("Results")
-                    .font(.headline)
-                    .underline()
-                
-                List(results, id: \.id) { result in
-                    GeometryReader { geometry in
-                        VStack(alignment: .center) {
-                            Text(result.content.description)
-                        }
-                        .frame(width: geometry.size.width)
+        }.sheet(
+            isPresented: $resultsSheetIsVisible,
+            content: {
+                Button() {
+                    resultsSheetIsVisible.toggle()
+                } label: {
+                    VStack {
+                        Image(systemName: "x.circle.fill")
+                            .foregroundStyle(.red)
                     }
+                }.padding(10)
+                
+                if diceAmount > 0, results.count > 0 {
+                    Text(showInputMessage())
+                        .font(.headline)
+                        .foregroundStyle(adjustColor())
+                    
+                    Text("Sum: \(sum)")
+                        .font(.headline)
+                        .padding()
+                    
+                    Text("Results")
+                        .font(.headline)
+                        .underline()
+                    
+                    List(results, id: \.id) { result in
+                        GeometryReader { geometry in
+                            VStack(alignment: .center) {
+                                Text(result.content.description)
+                            }
+                            .frame(width: geometry.size.width)
+                        }
+                    }
+                    .scrollContentBackground(.hidden)
+                    .font(.title)
+                    
+                } else {
+                    Text("You haven't rolled any dice.")
+                        .font(.headline)
+                    
+                    Spacer()
                 }
-                .scrollContentBackground(.hidden)
-                .font(.title)
-                
-            } else {
-                Text("You haven't rolled any dice.")
-                    .font(.headline)
-                
-                Spacer()
             }
-        })
-        .padding(.top)
+        ).padding(.top)
     }
+    
+    // MARK: Roll Button
     
     var rollButton: some View {
         Button {
@@ -177,16 +236,20 @@ struct ContentView: View {
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle)
         .tint(.red)
-        .padding(.top, 20)
+        .padding(.top, 40)
     }
+    
+    // MARK: Input Label
     
     var inputLabel: some View {
         Text(results.count > 0 ? showInputMessage() : " ")
-            .foregroundStyle(.black)
+            .foregroundStyle(adjustColor())
             .font(.callout)
             .padding(10)
     }
     
+    // MARK: Functions
+
     func menuButton(option: Dice) -> some View {
         Button() {
             diceType = option
@@ -210,7 +273,7 @@ struct ContentView: View {
         "You rolled \(diceAmount)\(diceType.rawValue)\(rollModifier != 0 ? (rollModifier > 0 ? "+" : "") + String(rollModifier) : "")"
     }
     
-    func adjustFontColor() -> Color {
+    func adjustColor() -> Color {
         colorScheme == .dark ? Color.white : Color.black
     }
 }
