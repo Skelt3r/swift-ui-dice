@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var resultsSheetIsVisible: Bool = false
     
     @State private var darkMode: Bool = false
+    @State private var primaryColor: Color = .red
     @State private var settingsSheetIsVisible: Bool = false
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -60,24 +61,61 @@ struct ContentView: View {
         } label: {
             Image(systemName: "gearshape.fill")
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .foregroundStyle(.red)
+                .foregroundStyle(primaryColor)
                 .imageScale(.large)
         }.sheet(
             isPresented: $settingsSheetIsVisible,
             content: {
+                
+                // Dark Mode
+                
                 Button() {
                     settingsSheetIsVisible.toggle()
                 } label: {
-                    VStack {
-                        Image(systemName: "x.circle.fill")
-                            .foregroundStyle(.red)
-                    }
+                    Image(systemName: "x.circle.fill")
+                        .foregroundStyle(primaryColor)
                 }.padding(10)
                 
-                Toggle(isOn: $darkMode, label: {
-                    Text("Dark Mode")
-                        .font(.title2)
-                }).padding(20)
+                Toggle(
+                    isOn: $darkMode,
+                    label: {
+                        HStack {
+                            Image(systemName: "moon.circle")
+                            Text("Dark Mode")
+                                .font(.title2)
+                        }
+                    }
+                )
+                .tint(primaryColor)
+                .padding(.horizontal, 40)
+                .padding(.top, 20)
+                
+                // Primary Color
+                
+                Menu {
+                    colorButton(.red)
+                    colorButton(.pink)
+                    colorButton(.orange)
+                    colorButton(.yellow)
+                    colorButton(.green)
+                    colorButton(.blue)
+                    colorButton(.cyan)
+                    colorButton(.mint)
+                    colorButton(.teal)
+                    colorButton(.purple)
+                    colorButton(.indigo)
+                    colorButton(.brown)
+                } label: {
+                    Image(systemName: "rainbow")
+                    Text("Primary Color")
+                    Spacer()
+                    Text(primaryColor.description.capitalized)
+                        .foregroundStyle(primaryColor)
+                }
+                .foregroundStyle(adjustColor())
+                .font(.title2)
+                .padding(.horizontal, 40)
+                .padding(.top, 20)
 
                 Spacer()
             }
@@ -89,18 +127,18 @@ struct ContentView: View {
     var diceMenu: some View {
         HStack {
             Menu {
-                menuButton(option: .d20)
-                menuButton(option: .d12)
-                menuButton(option: .d10)
-                menuButton(option: .d8)
-                menuButton(option: .d6)
-                menuButton(option: .d4)
-                menuButton(option: .d100)
+                diceButton(.d20)
+                diceButton(.d12)
+                diceButton(.d10)
+                diceButton(.d8)
+                diceButton(.d6)
+                diceButton(.d4)
+                diceButton(.d100)
             } label: {
                 Image(systemName: "dice.fill")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .imageScale(.large)
-                    .foregroundColor(.red)
+                    .foregroundColor(primaryColor)
                 
                 Text(diceType.rawValue)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -117,6 +155,7 @@ struct ContentView: View {
     var diceAmountInput: some View {
         HStack {
             HStack {
+                Spacer()
                 Button() {
                     diceAmount = 1
                 } label: {
@@ -128,7 +167,7 @@ struct ContentView: View {
                 Image(systemName: "number")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .imageScale(.large)
-                    .foregroundStyle(.red)
+                    .foregroundStyle(primaryColor)
             }
             
             Stepper("\(diceAmount)", value: $diceAmount, in: 1...100)
@@ -136,7 +175,7 @@ struct ContentView: View {
                 .onChange(of: diceAmount, { resetResults() })
                 .padding(.horizontal)
             
-        }.padding(.top, 20)
+        }.padding(.top, 30)
     }
     
     // MARK: Roll Modifier Input
@@ -144,6 +183,7 @@ struct ContentView: View {
     var rollModifierInput: some View {
         HStack {
             HStack {
+                Spacer()
                 Button() {
                     rollModifier = 0
                 } label: {
@@ -155,7 +195,7 @@ struct ContentView: View {
                 Image(systemName: "plus.forwardslash.minus")
                     .frame(maxWidth: .infinity, minHeight: 1, alignment: .trailing)
                     .imageScale(.large)
-                    .foregroundStyle(.red)
+                    .foregroundStyle(primaryColor)
             }
             
             Stepper("\(rollModifier)", value: $rollModifier, in: -100...100)
@@ -173,11 +213,12 @@ struct ContentView: View {
             Image(systemName: "sum")
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .imageScale(.large)
-                .foregroundStyle(.red)
+                .foregroundStyle(primaryColor)
             
             Text(sum.description)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
+            
         }.padding(.top, 30)
     }
     
@@ -191,7 +232,7 @@ struct ContentView: View {
                 Image(systemName: "list.number")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .imageScale(.large)
-                    .foregroundStyle(.red)
+                    .foregroundStyle(primaryColor)
                 
                 Image(systemName: "rectangle.expand.vertical")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -207,22 +248,17 @@ struct ContentView: View {
                 } label: {
                     VStack {
                         Image(systemName: "x.circle.fill")
-                            .foregroundStyle(.red)
+                            .foregroundStyle(primaryColor)
                     }
                 }.padding(10)
                 
                 if diceAmount > 0, results.count > 0 {
-                    Text(showInputMessage())
-                        .font(.headline)
+                    Text("\(showInputMessage()) -> \(sum)")
+                        .font(.title2)
                         .foregroundStyle(adjustColor())
-                    
-                    Text("Sum: \(sum)")
-                        .font(.headline)
                         .padding()
                     
-                    Text("Results")
-                        .font(.headline)
-                        .underline()
+                    Divider()
                     
                     List(results, id: \.id) { result in
                         GeometryReader { geometry in
@@ -264,7 +300,7 @@ struct ContentView: View {
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle)
-        .tint(.red)
+        .tint(primaryColor)
         .padding(.top, 40)
     }
     
@@ -279,12 +315,20 @@ struct ContentView: View {
     
     // MARK: Functions
 
-    func menuButton(option: Dice) -> some View {
+    func diceButton(_ option: Dice) -> some View {
         Button() {
             diceType = option
             results.removeAll()
         } label: {
             Text(option.rawValue)
+        }
+    }
+    
+    func colorButton(_ option: Color) -> some View {
+        Button() {
+            primaryColor = option
+        } label: {
+            Text(option.description.capitalized)
         }
     }
     
