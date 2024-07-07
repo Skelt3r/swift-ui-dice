@@ -18,12 +18,16 @@ struct ContentView: View {
     @State private var results: [Result] = []
     @State private var resultsSheetIsVisible: Bool = false
     
+    @State private var darkMode: Bool = false
+    @State private var settingsSheetIsVisible: Bool = false
+    
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
     // MARK: Body
     
     var body: some View {
         VStack {
+            settingsSheet
             diceMenu
             diceAmountInput
             rollModifierInput
@@ -31,18 +35,11 @@ struct ContentView: View {
             resultsSheet
             rollButton
             inputLabel
+            Spacer()
         }
+        .preferredColorScheme(darkMode ? .dark : .light)
         .font(.largeTitle)
         .padding()
-    }
-    
-    // MARK: Flare
-    
-    var flare: some View {
-        RoundedRectangle(cornerRadius: 0)
-            .foregroundStyle(.red)
-            .rotationEffect(.degrees(80))
-            .offset(y: -470)
     }
     
     // MARK: Header
@@ -53,6 +50,38 @@ struct ContentView: View {
             .fontWeight(.bold)
             .fontDesign(.rounded)
             .foregroundStyle(adjustColor())
+    }
+    
+    // MARK: Settings Sheet
+    
+    var settingsSheet: some View {
+        Button() {
+            settingsSheetIsVisible.toggle()
+        } label: {
+            Image(systemName: "gearshape.fill")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .foregroundStyle(.red)
+                .imageScale(.large)
+        }.sheet(
+            isPresented: $settingsSheetIsVisible,
+            content: {
+                Button() {
+                    settingsSheetIsVisible.toggle()
+                } label: {
+                    VStack {
+                        Image(systemName: "x.circle.fill")
+                            .foregroundStyle(.red)
+                    }
+                }.padding(10)
+                
+                Toggle(isOn: $darkMode, label: {
+                    Text("Dark Mode")
+                        .font(.title2)
+                }).padding(20)
+
+                Spacer()
+            }
+        ).padding()
     }
     
     // MARK: Dice Menu
@@ -242,7 +271,7 @@ struct ContentView: View {
     // MARK: Input Label
     
     var inputLabel: some View {
-        Text(results.count > 0 ? showInputMessage() : " ")
+        Text(results.count > 0 ? showInputMessage() : "...")
             .foregroundStyle(adjustColor())
             .font(.callout)
             .padding(10)
@@ -257,6 +286,13 @@ struct ContentView: View {
         } label: {
             Text(option.rawValue)
         }
+    }
+    
+    func flare(rotation: CGFloat, offset: CGFloat) -> some View {
+        RoundedRectangle(cornerRadius: 0)
+            .foregroundStyle(.black)
+            .rotationEffect(.degrees(rotation))
+            .offset(y: offset)
     }
     
     func generateRandomInt() -> Int {
