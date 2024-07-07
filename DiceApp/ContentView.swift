@@ -293,6 +293,7 @@ struct ContentView: View {
             for result in results {
                 sum += result.content
             }
+            sum += rollModifier
         } label: {
             Text("Roll dice")
                 .foregroundStyle(.black)
