@@ -67,7 +67,7 @@ struct ContentView: View {
             isPresented: $settingsSheetIsVisible,
             content: {
                 
-                // Dark Mode
+                // X Button
                 
                 Button() {
                     settingsSheetIsVisible.toggle()
@@ -75,6 +75,8 @@ struct ContentView: View {
                     Image(systemName: "x.circle.fill")
                         .foregroundStyle(primaryColor)
                 }.padding(10)
+                
+                // Dark Mode Toggle
                 
                 Toggle(
                     isOn: $darkMode,
@@ -87,10 +89,11 @@ struct ContentView: View {
                     }
                 )
                 .tint(primaryColor)
+                .preferredColorScheme(darkMode ? .dark : .light)
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
                 
-                // Primary Color
+                // Primary Color Menu
                 
                 Menu {
                     colorButton(.red)
