@@ -17,11 +17,10 @@ struct ContentView: View {
     @State private var sum: Int = 0
     @State private var results: [Result] = []
     @State private var resultsSheetIsVisible: Bool = false
-    
     @State private var darkMode: Bool = false
-    @State private var primaryColor: Color = .red
     @State private var settingsSheetIsVisible: Bool = false
-    
+    @State private var hintsAreVisible: Bool = false
+    @State private var primaryColor: Color = .red
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
     // MARK: Body
@@ -36,21 +35,12 @@ struct ContentView: View {
             resultsSheet
             rollButton
             inputLabel
+            helpButton
             Spacer()
         }
         .preferredColorScheme(darkMode ? .dark : .light)
         .font(.largeTitle)
         .padding()
-    }
-    
-    // MARK: Header
-    
-    var header: some View {
-        Text("Dice!")
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .fontDesign(.rounded)
-            .foregroundStyle(adjustColor())
     }
     
     // MARK: Settings Sheet
@@ -206,7 +196,8 @@ struct ContentView: View {
                 .onChange(of: rollModifier, { resetResults() })
                 .padding(.horizontal)
             
-        }.padding(.top, 30)
+        }
+        .padding(.top, 30)
     }
     
     // MARK: Sum Label
@@ -317,7 +308,35 @@ struct ContentView: View {
             .padding(10)
     }
     
-    // MARK: Functions
+    // MARK: Help Button
+    
+    var helpButton: some View {
+        Button() {
+            hintsAreVisible.toggle()
+        } label: {
+            Image(systemName: "questionmark.circle")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .foregroundStyle(primaryColor)
+                .imageScale(.large)
+        }
+        .popover(
+            isPresented: $hintsAreVisible,
+            attachmentAnchor: .point(.center),
+            content: {
+                VStack {
+                    hint(imageName: "dice", text: "Dice Type")
+                    hint(imageName: "number", text: "Dice Amount")
+                    hint(imageName: "plus.forwardslash.minus", text: "Roll Modifier")
+                    hint(imageName: "sum", text: "Sum")
+                    hint(imageName: "list.number", text: "Results List")
+                }
+                .font(.headline)
+            }
+        )
+        .padding()
+    }
+    
+    // MARK: View Functions
 
     func diceButton(_ option: Dice) -> some View {
         Button() {
@@ -336,12 +355,16 @@ struct ContentView: View {
         }
     }
     
-    func flare(rotation: CGFloat, offset: CGFloat) -> some View {
-        RoundedRectangle(cornerRadius: 0)
-            .foregroundStyle(.black)
-            .rotationEffect(.degrees(rotation))
-            .offset(y: offset)
+    func hint(imageName: String, text: String) -> some View {
+        HStack {
+            Image(systemName: imageName)
+            Text(text).presentationCompactAdaptation(.popover)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
     }
+    
+    // MARK: Utility Functions
     
     func generateRandomInt() -> Int {
         let diceValue = Int(diceType.rawValue.replacingOccurrences(of: "d", with: ""))
