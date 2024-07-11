@@ -327,10 +327,11 @@ struct ContentView: View {
                     hint(imageName: "dice", text: "Dice Type")
                     hint(imageName: "number", text: "Dice Amount")
                     hint(imageName: "plus.forwardslash.minus", text: "Roll Modifier")
-                    hint(imageName: "sum", text: "Sum")
+                    hint(imageName: "sum", text: " Sum")
                     hint(imageName: "list.number", text: "Results List")
                 }
                 .font(.headline)
+                .padding()
             }
         )
         .padding()
