@@ -57,15 +57,6 @@ struct ContentView: View {
             isPresented: $settingsSheetIsVisible,
             content: {
                 
-                // X Button
-                
-                Button() {
-                    settingsSheetIsVisible.toggle()
-                } label: {
-                    Image(systemName: "x.circle.fill")
-                        .foregroundStyle(primaryColor)
-                }.padding(10)
-                
                 // Dark Mode Toggle
                 
                 Toggle(
@@ -81,7 +72,8 @@ struct ContentView: View {
                 .tint(primaryColor)
                 .preferredColorScheme(darkMode ? .dark : .light)
                 .padding(.horizontal, 40)
-                .padding(.top, 20)
+                .padding(.top, 50)
+                .accessibilityIdentifier("darkModeToggle")
                 
                 // Primary Color Menu
                 
@@ -104,6 +96,7 @@ struct ContentView: View {
                     Spacer()
                     Text(primaryColor.description.capitalized)
                         .foregroundStyle(primaryColor)
+                        .accessibilityIdentifier("colorMenuLabel")
                 }
                 .foregroundStyle(adjustColor())
                 .font(.title2)
@@ -111,8 +104,22 @@ struct ContentView: View {
                 .padding(.top, 20)
 
                 Spacer()
+                
+                // X Button
+                
+                Button() {
+                    settingsSheetIsVisible.toggle()
+                } label: {
+                    Image(systemName: "x.circle.fill")
+                        .imageScale(.large)
+                        .foregroundStyle(primaryColor)
+                }
+                .padding(10)
+                .accessibilityIdentifier("xButtonSettings")
             }
-        ).padding()
+        )
+        .padding()
+        .accessibilityIdentifier("settingsButton")
     }
     
     // MARK: Dice Menu
@@ -139,6 +146,7 @@ struct ContentView: View {
                     .foregroundStyle(adjustColor())
                     .onChange(of: diceType, { resetResults() })
                     .padding(.horizontal)
+                    .accessibilityIdentifier("diceMenuLabel")
             }
         }.padding(.top)
     }
@@ -155,6 +163,7 @@ struct ContentView: View {
                     Image(systemName: "arrow.clockwise.circle.fill")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .foregroundStyle(.gray)
+                        .accessibilityIdentifier("diceAmountResetButton")
                 }
                 
                 Image(systemName: "number")
@@ -167,6 +176,7 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity)
                 .onChange(of: diceAmount, { resetResults() })
                 .padding(.horizontal)
+                .accessibilityIdentifier("diceAmountStepper")
             
         }.padding(.top, 30)
     }
@@ -183,7 +193,7 @@ struct ContentView: View {
                     Image(systemName: "arrow.clockwise.circle.fill")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .foregroundStyle(.gray)
-                }
+                }.accessibilityIdentifier("rollModifierResetButton")
                 
                 Image(systemName: "plus.forwardslash.minus")
                     .frame(maxWidth: .infinity, minHeight: 1, alignment: .trailing)
@@ -195,9 +205,9 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity)
                 .onChange(of: rollModifier, { resetResults() })
                 .padding(.horizontal)
+                .accessibilityIdentifier("rollModifierStepper")
             
-        }
-        .padding(.top, 30)
+        }.padding(.top, 30)
     }
     
     // MARK: Sum Label
@@ -212,6 +222,7 @@ struct ContentView: View {
             Text(sum.description)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
+                .accessibilityIdentifier("sumLabel")
             
         }.padding(.top, 30)
     }
@@ -233,26 +244,24 @@ struct ContentView: View {
                     .imageScale(.small)
                     .foregroundStyle(adjustColor())
                     .padding(.horizontal, 10)
+                    .accessibilityIdentifier("resultsListButton")
             }
         }.sheet(
             isPresented: $resultsSheetIsVisible,
             content: {
-                Button() {
-                    resultsSheetIsVisible.toggle()
-                } label: {
-                    VStack {
-                        Image(systemName: "x.circle.fill")
-                            .foregroundStyle(primaryColor)
-                    }
-                }.padding(10)
-                
                 if diceAmount > 0, results.count > 0 {
+                    
+                    // Input + Sum Label
+                    
                     Text("\(showInputMessage()) -> \(sum)")
                         .font(.title2)
                         .foregroundStyle(adjustColor())
-                        .padding()
+                        .padding(50)
+                        .accessibilityIdentifier("resultsListInputAndSum")
                     
                     Divider()
+                    
+                    // Individual Results List
                     
                     List(results, id: \.id) { result in
                         GeometryReader { geometry in
@@ -264,13 +273,30 @@ struct ContentView: View {
                     }
                     .scrollContentBackground(.hidden)
                     .font(.title)
+                    .accessibilityIdentifier("resultsList")
                     
                 } else {
+                    
+                    // Placeholder Message
+                    
                     Text("You haven't rolled any dice.")
                         .font(.headline)
+                        .padding(.top, 50)
                     
                     Spacer()
                 }
+                
+                // X Button
+                
+                Button() {
+                    resultsSheetIsVisible.toggle()
+                } label: {
+                    Image(systemName: "x.circle.fill")
+                        .imageScale(.large)
+                        .foregroundStyle(primaryColor)
+                }
+                .padding(10)
+                .accessibilityIdentifier("xButtonResultsSheet")
             }
         ).padding(.top)
     }
@@ -297,6 +323,7 @@ struct ContentView: View {
         .buttonBorderShape(.roundedRectangle)
         .tint(primaryColor)
         .padding(.top, 40)
+        .accessibilityIdentifier("rollButton")
     }
     
     // MARK: Input Label
@@ -306,6 +333,7 @@ struct ContentView: View {
             .foregroundStyle(adjustColor())
             .font(.callout)
             .padding(10)
+            .accessibilityIdentifier("inputLabel")
     }
     
     // MARK: Help Button
@@ -318,6 +346,7 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .foregroundStyle(primaryColor)
                 .imageScale(.large)
+                .accessibilityIdentifier("helpButton")
         }
         .popover(
             isPresented: $hintsAreVisible,
@@ -345,6 +374,7 @@ struct ContentView: View {
             results.removeAll()
         } label: {
             Text(option.rawValue)
+                .accessibilityIdentifier("\(option)DiceButton")
         }
     }
     
@@ -353,7 +383,7 @@ struct ContentView: View {
             primaryColor = option
         } label: {
             Text(option.description.capitalized)
-        }
+        }.accessibilityIdentifier("\(option)ColorButton")
     }
     
     func hint(imageName: String, text: String) -> some View {
