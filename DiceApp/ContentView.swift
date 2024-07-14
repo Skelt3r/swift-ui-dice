@@ -17,11 +17,13 @@ struct ContentView: View {
     @State private var sum: Int = 0
     @State private var results: [Result] = []
     @State private var resultsSheetIsVisible: Bool = false
-    @State private var darkMode: Bool = false
     @State private var settingsSheetIsVisible: Bool = false
     @State private var hintsAreVisible: Bool = false
-    @State private var primaryColor: Color = .red
+    
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    @AppStorage("darkMode") private var darkMode: Bool = false
+    @AppStorage("primaryColor") private var primaryColor: Color = .red
     
     // MARK: Body
     
@@ -94,7 +96,8 @@ struct ContentView: View {
                     Image(systemName: "rainbow")
                     Text("Primary Color")
                     Spacer()
-                    Text(primaryColor.description.capitalized)
+                    Circle()
+                        .frame(width: 48, height: 32)
                         .foregroundStyle(primaryColor)
                         .accessibilityIdentifier("colorMenuLabel")
                 }
