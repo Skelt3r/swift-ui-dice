@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BCB2A4C22C3F75B600111B9A /* DiceAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4C12C3F75B600111B9A /* DiceAppUITests.swift */; };
 		BCB2A4CB2C3F7F9800111B9A /* DiceAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4CA2C3F7F9800111B9A /* DiceAppScreen.swift */; };
+		BCB2A4CF2C4452CB00111B9A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4CE2C4452CB00111B9A /* Color.swift */; };
 		BCE6EFE62C2270030090C606 /* DiceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6EFE52C2270030090C606 /* DiceApp.swift */; };
 		BCE6EFE82C2270030090C606 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6EFE72C2270030090C606 /* ContentView.swift */; };
 		BCE6EFEA2C2270040090C606 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCE6EFE92C2270040090C606 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		BCB2A4BF2C3F75B600111B9A /* DiceAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiceAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCB2A4C12C3F75B600111B9A /* DiceAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceAppUITests.swift; sourceTree = "<group>"; };
 		BCB2A4CA2C3F7F9800111B9A /* DiceAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceAppScreen.swift; sourceTree = "<group>"; };
+		BCB2A4CE2C4452CB00111B9A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BCE6EFE22C2270030090C606 /* DiceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE6EFE52C2270030090C606 /* DiceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceApp.swift; sourceTree = "<group>"; };
 		BCE6EFE72C2270030090C606 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				BCE6EFE52C2270030090C606 /* DiceApp.swift */,
 				BCE6EFF42C2872640090C606 /* DiceModel.swift */,
 				BCE6EFE72C2270030090C606 /* ContentView.swift */,
+				BCB2A4CE2C4452CB00111B9A /* Color.swift */,
 				BCE6EFE92C2270040090C606 /* Assets.xcassets */,
 				BCE6EFEB2C2270040090C606 /* DiceApp.entitlements */,
 				BCE6EFEC2C2270040090C606 /* Preview Content */,
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE6EFE82C2270030090C606 /* ContentView.swift in Sources */,
+				BCB2A4CF2C4452CB00111B9A /* Color.swift in Sources */,
 				BCE6EFE62C2270030090C606 /* DiceApp.swift in Sources */,
 				BCE6EFF52C2872640090C606 /* DiceModel.swift in Sources */,
 			);
