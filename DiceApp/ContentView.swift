@@ -59,7 +59,7 @@ struct ContentView: View {
             isPresented: $settingsSheetIsVisible,
             content: {
                 
-                // Dark Mode Toggle
+                // MARK: Dark Mode Toggle
                 
                 Toggle(
                     isOn: $darkMode,
@@ -77,7 +77,7 @@ struct ContentView: View {
                 .padding(.top, 50)
                 .accessibilityIdentifier("darkModeToggle")
                 
-                // Primary Color Menu
+                // MARK: Primary Color Menu
                 
                 Menu {
                     colorButton(.red)
@@ -108,7 +108,7 @@ struct ContentView: View {
 
                 Spacer()
                 
-                // X Button
+                // MARK: X Button
                 
                 Button() {
                     settingsSheetIsVisible.toggle()
@@ -254,7 +254,7 @@ struct ContentView: View {
             content: {
                 if diceAmount > 0, results.count > 0 {
                     
-                    // Input + Sum Label
+                    // MARK: Input Label
                     
                     Text("\(showInputMessage()) -> \(sum)")
                         .font(.title2)
@@ -264,7 +264,7 @@ struct ContentView: View {
                     
                     Divider()
                     
-                    // Individual Results List
+                    // MARK: Results List
                     
                     List(results, id: \.id) { result in
                         GeometryReader { geometry in
@@ -280,7 +280,7 @@ struct ContentView: View {
                     
                 } else {
                     
-                    // Placeholder Message
+                    // MARK: Placeholder
                     
                     Text("You haven't rolled any dice.")
                         .font(.headline)
@@ -289,7 +289,7 @@ struct ContentView: View {
                     Spacer()
                 }
                 
-                // X Button
+                // MARK: X Button
                 
                 Button() {
                     resultsSheetIsVisible.toggle()
