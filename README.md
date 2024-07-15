@@ -1,6 +1,6 @@
 A dice roller app for iOS built in SwiftUI.
 
-![light-mode](https://github.com/Skelt3r/swift-ui-dice/assets/58678379/29af35f8-0867-44c5-976f-6196d7e43400)
-![dark-mode](https://github.com/Skelt3r/swift-ui-dice/assets/58678379/da6948e7-6263-4124-8d35-d65e29847d12)
+![light-mode](https://github.com/user-attachments/assets/9d4b2999-8736-4ebe-aca6-a4c8d813e27d)
+![dark-mode](https://github.com/user-attachments/assets/2c428bc3-a3f0-47f1-9318-96c7d4c19b9c)
 
 Dice icon by [SkullReaper](https://skullreaper.itch.io/dice-icons).
