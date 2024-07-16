@@ -28,7 +28,7 @@ class DiceAppScreen {
     
     private lazy var settingsButton = app.buttons["settingsButton"]
     private lazy var darkModeToggle = app.switches["darkModeToggle"]
-    private lazy var colorMenuLabel = app.sheets.buttons["colorMenuLabel"]
+    private lazy var colorMenuButton = app.buttons["colorMenuButton"]
     private lazy var xButtonSettings = app.buttons["xButtonSettings"]
     
     private lazy var diceMenuLabel = app.staticTexts["diceMenuLabel"]
@@ -45,8 +45,10 @@ class DiceAppScreen {
     
     private lazy var sumLabel = app.staticTexts["sumLabel"]
     
-    private lazy var resultsListButton = app.buttons["resultsListButton"]
-    private lazy var xButtonResultsList = app.buttons["xButtonResultsList"]
+    private lazy var resultsButton = app.buttons["resultsButton"]
+    private lazy var resultsListInputAndOutput = app.staticTexts["resultsListInputAndOutput"]
+    private lazy var resultsList = app.collectionViews["resultsList"]
+    private lazy var xButtonResults = app.buttons["xButtonResults"]
     
     private lazy var rollButton = app.buttons["rollButton"]
     private lazy var inputLabel = app.staticTexts["inputLabel"]
@@ -69,7 +71,7 @@ class DiceAppScreen {
 
     @discardableResult
     func selectPrimaryColor(_ option: Color) -> Self {
-        colorMenuLabel.tap()
+        colorMenuButton.tap()
         app.buttons["\(option)ColorButton"].tap()
         return self
     }
@@ -137,6 +139,12 @@ class DiceAppScreen {
         return self
     }
     
+    @discardableResult
+    func tapResultsButton() -> Self {
+        resultsButton.tap()
+        return self
+    }
+    
     // MARK: Assertions
     
     @discardableResult
@@ -167,15 +175,32 @@ class DiceAppScreen {
     func validateActiveSumLabel() -> Self {
         let diceType = Int(diceMenuLabel.label.replacingOccurrences(of: "d", with: ""))!
         let diceAmount = Int(diceAmountStepper.label)!
+        let rollModifier = Int(rollModifierStepper.label)!
         let sum = Int(sumLabel.label)!
         XCTAssertGreaterThan(sum, 0)
-        XCTAssertLessThanOrEqual(sum, diceType * diceAmount)
+        XCTAssertLessThanOrEqual(sum, (diceType * diceAmount) + rollModifier)
         return self
     }
     
     @discardableResult
     func validateInputLabel(_ expectedValue: String) -> Self {
         XCTAssertEqual(inputLabel.label, expectedValue)
+        return self
+    }
+    
+    @discardableResult
+    func validateSettingsSheet() -> Self {
+        XCTAssertTrue(darkModeToggle.isHittable)
+        XCTAssertTrue(colorMenuButton.isHittable)
+        XCTAssertTrue(xButtonSettings.isHittable)
+        return self
+    }
+    
+    @discardableResult
+    func validateResultsList(hasLabel: any RegexComponent, hasLength: Int) -> Self {
+        XCTAssertTrue(resultsListInputAndOutput.label.contains(hasLabel))
+        XCTAssertTrue(resultsList.exists)
+        XCTAssert(xButtonResults.isHittable)
         return self
     }
 }

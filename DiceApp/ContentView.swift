@@ -99,7 +99,7 @@ struct ContentView: View {
                     Circle()
                         .frame(width: 48, height: 32)
                         .foregroundStyle(primaryColor)
-                        .accessibilityIdentifier("colorMenuLabel")
+                        .accessibilityIdentifier("colorMenuButton")
                 }
                 .foregroundStyle(adjustColor())
                 .font(.title2)
@@ -247,7 +247,7 @@ struct ContentView: View {
                     .imageScale(.small)
                     .foregroundStyle(adjustColor())
                     .padding(.horizontal, 10)
-                    .accessibilityIdentifier("resultsListButton")
+                    .accessibilityIdentifier("resultsButton")
             }
         }.sheet(
             isPresented: $resultsSheetIsVisible,
@@ -260,7 +260,7 @@ struct ContentView: View {
                         .font(.title2)
                         .foregroundStyle(adjustColor())
                         .padding(50)
-                        .accessibilityIdentifier("resultsListInputAndSum")
+                        .accessibilityIdentifier("resultsListInputAndOutput")
                     
                     Divider()
                     
@@ -299,7 +299,7 @@ struct ContentView: View {
                         .foregroundStyle(primaryColor)
                 }
                 .padding(10)
-                .accessibilityIdentifier("xButtonResultsSheet")
+                .accessibilityIdentifier("xButtonResults")
             }
         ).padding(.top)
     }
