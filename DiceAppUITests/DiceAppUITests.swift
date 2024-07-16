@@ -38,13 +38,23 @@ class DiceAppUITests: XCTestCase {
             .validateInputLabel("You rolled 4d6")
     }
     
-    func test_addRollModifier() throws {
+    func test_addPositiveRollModifier() throws {
         DiceAppScreen()
             .increaseRollModifier(by: 1)
             .validateRollModifierLabel(1)
             .tapRollButton()
             .validateActiveSumLabel()
             .validateInputLabel("You rolled 1d20+1")
+    }
+    
+    func test_addNegativeRollModifier() throws {
+        DiceAppScreen()
+            .selectDiceType(.d4)
+            .increaseDiceAmount(by: 1)
+            .decreaseRollModifier(by: 1)
+            .tapRollButton()
+            .validateActiveSumLabel()
+            .validateInputLabel("You rolled 2d4-1")
     }
     
     func test_resetDiceAmount() throws {
@@ -65,5 +75,21 @@ class DiceAppUITests: XCTestCase {
             .validateRollModifierLabel(0)
             .validateDefaultSumLabel()
             .validateInputLabel("...")
+    }
+    
+    func test_openSettingsMenu() throws {
+        DiceAppScreen()
+            .tapSettingsButton()
+            .validateSettingsSheet()
+    }
+    
+    func test_openResultsList() throws {
+        DiceAppScreen()
+            .selectDiceType(.d12)
+            .increaseDiceAmount(by: 3)
+            .increaseRollModifier(by: 1)
+            .tapRollButton()
+            .tapResultsButton()
+            .validateResultsList(hasLabel: /You rolled 4d12\+1 -> (\d+)/, hasLength: 4)
     }
 }
