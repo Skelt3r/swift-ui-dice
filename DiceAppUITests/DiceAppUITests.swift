@@ -90,6 +90,15 @@ class DiceAppUITests: XCTestCase {
             .increaseRollModifier(by: 1)
             .tapRollButton()
             .tapResultsButton()
-            .validateResultsList(hasLabel: /You rolled 4d12\+1 -> (\d+)/, hasLength: 4)
+            .validateResultsList(
+                hasLabel: /You rolled 4d12\+1 -> (\d+)/,
+                hasLength: 4
+            )
+    }
+    
+    func test_openHintBox() throws {
+        DiceAppScreen()
+            .tapHelpButton()
+            .validateHintBox()
     }
 }

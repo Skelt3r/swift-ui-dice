@@ -53,6 +53,10 @@ class DiceAppScreen {
     private lazy var rollButton = app.buttons["rollButton"]
     private lazy var inputLabel = app.staticTexts["inputLabel"]
     
+    private lazy var helpButton = app.buttons["helpButton"]
+    private lazy var hintImage = app.images.matching(identifier: "hintImage")
+    private lazy var hintText = app.staticTexts.matching(identifier: "hintText")
+    
     // MARK: Actions
     
     @discardableResult
@@ -145,6 +149,12 @@ class DiceAppScreen {
         return self
     }
     
+    @discardableResult
+    func tapHelpButton() -> Self {
+        helpButton.tap()
+        return self
+    }
+    
     // MARK: Assertions
     
     @discardableResult
@@ -201,6 +211,13 @@ class DiceAppScreen {
         XCTAssertTrue(resultsListInputAndOutput.label.contains(hasLabel))
         XCTAssertTrue(resultsList.exists)
         XCTAssert(xButtonResults.isHittable)
+        return self
+    }
+    
+    @discardableResult
+    func validateHintBox() -> Self {
+        XCTAssertEqual(hintImage.allElementsBoundByAccessibilityElement.count, 5)
+        XCTAssertEqual(hintText.allElementsBoundByAccessibilityElement.count, 5)
         return self
     }
 }

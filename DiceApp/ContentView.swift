@@ -392,7 +392,9 @@ struct ContentView: View {
     func hint(imageName: String, text: String) -> some View {
         HStack {
             Image(systemName: imageName)
+                .accessibilityIdentifier("hintImage")
             Text(text).presentationCompactAdaptation(.popover)
+                .accessibilityIdentifier("hintText")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
