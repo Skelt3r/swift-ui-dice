@@ -15,17 +15,29 @@ extension Color: RawRepresentable {
         }
         
         do {
-            let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) ?? .black
-            self = Color(color)
+            self = Color(
+                try NSKeyedUnarchiver
+                    .unarchivedObject(
+                        ofClass: UIColor.self,
+                        from: data
+                    )
+                ?? .black
+            )
         } catch {
             self = .black
         }
     }
-
+    
     public var rawValue: String {
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false) as Data
+            let data = try NSKeyedArchiver
+                .archivedData(
+                    withRootObject: UIColor(self),
+                    requiringSecureCoding: false
+                ) as Data
+            
             return data.base64EncodedString()
+            
         } catch {
             return ""
         }

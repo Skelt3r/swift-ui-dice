@@ -5,7 +5,7 @@
 //  Created by Chris Allen on 6/23/24.
 //
 
-import Foundation
+import SwiftUI
 
 enum Dice: String {
     case d100 = "d100"
@@ -20,4 +20,21 @@ enum Dice: String {
 struct Result: Identifiable {
     let id = UUID()
     let content: Int
+}
+
+public var colorOptions: [Color] {
+    [
+        .red,
+        .pink,
+        .orange,
+        .yellow,
+        .green,
+        .blue,
+        .cyan,
+        .mint,
+        .teal,
+        .purple,
+        .indigo,
+        .brown
+    ]
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // MARK: Variables
+    // MARK: State Variables
     
     @State private var diceType: Dice = .d20
     @State private var diceAmount: Int = 1
@@ -77,21 +77,12 @@ struct ContentView: View {
                 .padding(.top, 50)
                 .accessibilityIdentifier("darkModeToggle")
                 
-                // MARK: Primary Color Menu
+                // MARK: Color Menu
                 
                 Menu {
-                    colorButton(.red)
-                    colorButton(.pink)
-                    colorButton(.orange)
-                    colorButton(.yellow)
-                    colorButton(.green)
-                    colorButton(.blue)
-                    colorButton(.cyan)
-                    colorButton(.mint)
-                    colorButton(.teal)
-                    colorButton(.purple)
-                    colorButton(.indigo)
-                    colorButton(.brown)
+                    ForEach(0..<colorOptions.count, id: \.self) { index in
+                        colorButton(colorOptions[index])
+                    }
                 } label: {
                     Image(systemName: "rainbow")
                     Text("Primary Color")
@@ -154,7 +145,7 @@ struct ContentView: View {
         }.padding(.top)
     }
     
-    // MARK: Dice Amount Input
+    // MARK: Dice Amount
     
     var diceAmountInput: some View {
         HStack {
@@ -184,7 +175,7 @@ struct ContentView: View {
         }.padding(.top, 30)
     }
     
-    // MARK: Roll Modifier Input
+    // MARK: Roll Modifier
     
     var rollModifierInput: some View {
         HStack {
