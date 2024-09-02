@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // MARK: State Variables
+    // MARK: Elements
     
     @State private var diceType: Dice = .d20
     @State private var diceAmount: Int = 1
@@ -25,7 +25,7 @@ struct ContentView: View {
     @AppStorage("darkMode") private var darkMode: Bool = false
     @AppStorage("primaryColor") private var primaryColor: Color = .red
     
-    // MARK: Body
+    // MARK: Views
     
     var body: some View {
         VStack {
@@ -101,15 +101,10 @@ struct ContentView: View {
                 
                 // MARK: X Button
                 
-                Button() {
-                    settingsSheetIsVisible.toggle()
-                } label: {
-                    Image(systemName: "x.circle.fill")
-                        .imageScale(.large)
-                        .foregroundStyle(primaryColor)
-                }
-                .padding(10)
-                .accessibilityIdentifier("xButtonSettings")
+                xButton(
+                    binding: $settingsSheetIsVisible,
+                    accessibilityId: "xButtonSettings"
+                )
             }
         )
         .padding()
@@ -282,15 +277,10 @@ struct ContentView: View {
                 
                 // MARK: X Button
                 
-                Button() {
-                    resultsSheetIsVisible.toggle()
-                } label: {
-                    Image(systemName: "x.circle.fill")
-                        .imageScale(.large)
-                        .foregroundStyle(primaryColor)
-                }
-                .padding(10)
-                .accessibilityIdentifier("xButtonResults")
+                xButton(
+                    binding: $resultsSheetIsVisible,
+                    accessibilityId: "xButtonResults"
+                )
             }
         ).padding(.top)
     }
@@ -362,6 +352,9 @@ struct ContentView: View {
     
     // MARK: View Functions
 
+    /// Generates a menu option button with the given dice value as the label.
+    /// - Parameter option: ``Dice``
+    /// - Returns: ``View``
     func diceButton(_ option: Dice) -> some View {
         Button() {
             diceType = option
@@ -372,6 +365,9 @@ struct ContentView: View {
         }
     }
     
+    /// Generates a menu option button with the given color as the label.
+    /// - Parameter option: ``Color``
+    /// - Returns: ``View``
     func colorButton(_ option: Color) -> some View {
         Button() {
             primaryColor = option
@@ -380,6 +376,29 @@ struct ContentView: View {
         }.accessibilityIdentifier("\(option)ColorButton")
     }
     
+    /// Generates an X button which dismisses a Sheet view.
+    /// - Parameters:
+    ///   - binding: The binding to be toggled when the button is clicked. ``Binding<Bool>``
+    ///   - accessibilityId: The identifier for the button. ``String``
+    /// - Returns: ``View``
+    func xButton(binding: Binding<Bool>, accessibilityId: String) -> some View {
+        Button() {
+            binding.wrappedValue.toggle()
+        } label: {
+            Image(systemName: "x.circle.fill")
+                .imageScale(.large)
+                .foregroundStyle(primaryColor)
+        }
+        .padding(10)
+        .accessibilityIdentifier(accessibilityId)
+    }
+    
+    /// Generates the given system image and text in an ``HStack``.
+    /// Used to populate the hint box.
+    /// - Parameters:
+    ///   - imageName: System name ``String``
+    ///   - text: Hint text ``String``
+    /// - Returns: ``View``
     func hint(imageName: String, text: String) -> some View {
         HStack {
             Image(systemName: imageName)
@@ -393,20 +412,27 @@ struct ContentView: View {
     
     // MARK: Utility Functions
     
+    /// Generates a random integer between 1 and the max value of the currently selected `diceType`.
+    /// - Returns: ``Int``
     func generateRandomInt() -> Int {
         let diceValue = Int(diceType.rawValue.replacingOccurrences(of: "d", with: ""))
         return Int.random(in: 1...diceValue!)
     }
     
+    /// Clears the `results` array and sets the `sum` of results to zero.
     func resetResults() {
         results.removeAll()
         sum = 0
     }
     
+    /// Displays a message containing the most recent roll parameters and sum of results.
+    /// - Returns: ``String``
     func showInputMessage() -> String {
         "You rolled \(diceAmount)\(diceType.rawValue)\(rollModifier != 0 ? (rollModifier > 0 ? "+" : "") + String(rollModifier) : "")"
     }
     
+    /// Toggles between black and white based on the current `colorScheme`.
+    /// - Returns: ``Color``
     func adjustColor() -> Color {
         colorScheme == .dark ? Color.white : Color.black
     }
