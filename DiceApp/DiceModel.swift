@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Dice: String {
+enum Dice: String, CaseIterable {
     case d100 = "d100"
     case d20 = "d20"
     case d12 = "d12"

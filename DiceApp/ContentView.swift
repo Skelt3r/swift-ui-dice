@@ -11,14 +11,14 @@ struct ContentView: View {
     
     // MARK: Elements
     
-    @State private var diceType: Dice = .d20
-    @State private var diceAmount: Int = 1
-    @State private var rollModifier: Int = 0
-    @State private var sum: Int = 0
-    @State private var results: [Result] = []
-    @State private var resultsSheetIsVisible: Bool = false
-    @State private var settingsSheetIsVisible: Bool = false
-    @State private var hintsAreVisible: Bool = false
+    @State internal var diceType: Dice = .d20
+    @State internal var diceAmount: Int = 1
+    @State internal var rollModifier: Int = 0
+    @State internal var sum: Int = 0
+    @State internal var results: [Result] = []
+    @State internal var resultsSheetIsVisible: Bool = false
+    @State internal var settingsSheetIsVisible: Bool = false
+    @State internal var hintsAreVisible: Bool = false
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
@@ -29,15 +29,15 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            settingsSheet
-            diceMenu
-            diceAmountInput
-            rollModifierInput
-            sumLabel
-            resultsSheet
-            rollButton
-            inputLabel
-            helpButton
+            settingsSheet()
+            diceMenu()
+            diceAmountInput()
+            rollModifierInput()
+            sumLabel()
+            resultsSheet()
+            rollButton()
+            inputLabel()
+            helpButton()
             Spacer()
         }
         .preferredColorScheme(darkMode ? .dark : .light)
@@ -47,7 +47,7 @@ struct ContentView: View {
     
     // MARK: Settings Sheet
     
-    var settingsSheet: some View {
+    func settingsSheet() -> some View {
         Button() {
             settingsSheetIsVisible.toggle()
         } label: {
@@ -113,16 +113,12 @@ struct ContentView: View {
     
     // MARK: Dice Menu
     
-    var diceMenu: some View {
+    func diceMenu() -> some View {
         HStack {
             Menu {
-                diceButton(.d20)
-                diceButton(.d12)
-                diceButton(.d10)
-                diceButton(.d8)
-                diceButton(.d6)
-                diceButton(.d4)
-                diceButton(.d100)
+                ForEach(Dice.allCases, id: \.rawValue) { item in
+                    diceButton(item)
+                }
             } label: {
                 Image(systemName: "dice.fill")
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -142,7 +138,7 @@ struct ContentView: View {
     
     // MARK: Dice Amount
     
-    var diceAmountInput: some View {
+    func diceAmountInput() -> some View {
         HStack {
             HStack {
                 Spacer()
@@ -172,7 +168,7 @@ struct ContentView: View {
     
     // MARK: Roll Modifier
     
-    var rollModifierInput: some View {
+    func rollModifierInput() -> some View {
         HStack {
             HStack {
                 Spacer()
@@ -201,7 +197,7 @@ struct ContentView: View {
     
     // MARK: Sum Label
     
-    var sumLabel: some View {
+    func sumLabel() -> some View {
         HStack {
             Image(systemName: "sum")
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -218,7 +214,7 @@ struct ContentView: View {
     
     // MARK: Results Sheet
     
-    var resultsSheet: some View {
+    func resultsSheet() -> some View {
         Button {
             resultsSheetIsVisible.toggle()
         } label: {
@@ -287,7 +283,7 @@ struct ContentView: View {
     
     // MARK: Roll Button
     
-    var rollButton: some View {
+    func rollButton() -> some View {
         Button {
             guard diceAmount > 0 else { return }
             resetResults()
@@ -312,7 +308,7 @@ struct ContentView: View {
     
     // MARK: Input Label
     
-    var inputLabel: some View {
+    func inputLabel() -> some View {
         Text(results.count > 0 ? showInputMessage() : "...")
             .foregroundStyle(adjustColor())
             .font(.callout)
@@ -322,7 +318,7 @@ struct ContentView: View {
     
     // MARK: Help Button
     
-    var helpButton: some View {
+    func helpButton() -> some View {
         Button() {
             hintsAreVisible.toggle()
         } label: {
@@ -350,7 +346,7 @@ struct ContentView: View {
         .padding()
     }
     
-    // MARK: View Functions
+    // MARK: Dice Button
 
     /// Generates a menu option button with the given dice value as the label.
     /// - Parameter option: ``Dice``
@@ -365,6 +361,8 @@ struct ContentView: View {
         }
     }
     
+    // MARK: Color Button
+    
     /// Generates a menu option button with the given color as the label.
     /// - Parameter option: ``Color``
     /// - Returns: ``View``
@@ -375,6 +373,8 @@ struct ContentView: View {
             Text(option.description.capitalized)
         }.accessibilityIdentifier("\(option)ColorButton")
     }
+    
+    // MARK: X Button
     
     /// Generates an X button which dismisses a Sheet view.
     /// - Parameters:
@@ -392,6 +392,8 @@ struct ContentView: View {
         .padding(10)
         .accessibilityIdentifier(accessibilityId)
     }
+    
+    // MARK: Hint
     
     /// Generates the given system image and text in an ``HStack``.
     /// Used to populate the hint box.
