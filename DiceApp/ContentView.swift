@@ -19,6 +19,7 @@ struct ContentView: View {
     @State internal var resultsSheetIsVisible: Bool = false
     @State internal var settingsSheetIsVisible: Bool = false
     @State internal var hintsAreVisible: Bool = false
+    @State internal var shake: Bool = false
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
@@ -206,6 +207,7 @@ struct ContentView: View {
             
             Text(sum.description)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .offset(x: shake ? 3 : 0)
                 .padding(.horizontal)
                 .accessibilityIdentifier("sumLabel")
             
@@ -286,18 +288,28 @@ struct ContentView: View {
     func rollButton() -> some View {
         Button {
             guard diceAmount > 0 else { return }
+            shake = true
             resetResults()
+            
             for _ in 1...diceAmount {
-                results.append(Result(content: generateRandomInt()))
-            }
-            for result in results {
+                let result = Result(content: generateRandomInt())
+                results.append(result)
                 sum += result.content
             }
+            
             sum += rollModifier
+            
         } label: {
             Text("Roll dice")
                 .foregroundStyle(.black)
                 .fontDesign(.monospaced)
+        }
+        .onChange(of: shake) {
+            withAnimation(.spring(
+                response: 0.2,
+                dampingFraction: 0.2,
+                blendDuration: 0.2
+            )) { shake = false }
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle)
@@ -438,6 +450,7 @@ struct ContentView: View {
     func adjustColor() -> Color {
         colorScheme == .dark ? Color.white : Color.black
     }
+
 }
 
 #Preview {
