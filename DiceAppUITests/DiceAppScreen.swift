@@ -10,18 +10,6 @@ import XCTest
 
 class DiceAppScreen {
     
-    // MARK: Structs
-    
-    enum Dice: String {
-        case d100 = "d100"
-        case d20 = "d20"
-        case d12 = "d12"
-        case d10 = "d10"
-        case d8 = "d8"
-        case d6 = "d6"
-        case d4 = "d4"
-    }
-    
     // MARK: Elements
     
     let app = XCUIApplication()
