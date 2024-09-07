@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // MARK: Elements
+    // MARK: States
     
     @State internal var diceType: Dice = .d20
     @State internal var diceAmount: Int = 1
@@ -439,10 +439,13 @@ struct ContentView: View {
         sum = 0
     }
     
-    /// Displays a message containing the most recent roll parameters and sum of results.
+    /// Displays a message containing the most recent roll parameters.
     /// - Returns: ``String``
     func showInputMessage() -> String {
-        "You rolled \(diceAmount)\(diceType.rawValue)\(rollModifier != 0 ? (rollModifier > 0 ? "+" : "") + String(rollModifier) : "")"
+        "You rolled " +
+        String(diceAmount) +
+        diceType.rawValue +
+        (rollModifier != 0 ? (rollModifier > 0 ? "+" : "") + String(rollModifier) : "")
     }
     
     /// Toggles between black and white based on the current `colorScheme`.
