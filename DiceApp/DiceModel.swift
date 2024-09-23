@@ -22,7 +22,7 @@ struct Result: Identifiable {
     let content: Int
 }
 
-public var colorOptions: [Color] {
+var colorOptions: [Color] {
     [
         .red,
         .pink,

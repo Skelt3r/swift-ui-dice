@@ -342,7 +342,8 @@ struct ContentView: View {
         }
         .popover(
             isPresented: $hintsAreVisible,
-            attachmentAnchor: .point(.center),
+            attachmentAnchor: .point(.bottom),
+            arrowEdge: .bottom,
             content: {
                 VStack {
                     hint(imageName: "dice", text: "Dice Type")
