@@ -9,7 +9,7 @@ import XCTest
 
 class DiceAppUITests: XCTestCase {
     
-    let app = XCUIApplication()
+    let app = DiceAppScreen().app
     
     override func setUpWithError() throws {
         continueAfterFailure = false

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  DiceView.swift
 //  DiceApp
 //
 //  Created by Chris Allen on 6/18/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct DiceView: View {
     
     // MARK: States
     
@@ -458,5 +458,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    DiceView()
 }
