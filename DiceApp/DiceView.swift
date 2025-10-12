@@ -342,7 +342,7 @@ struct DiceView: View {
         }
         .popover(
             isPresented: $hintsAreVisible,
-            attachmentAnchor: .point(.bottom),
+            attachmentAnchor: .point(.center),
             arrowEdge: .bottom,
             content: {
                 VStack {
@@ -418,7 +418,8 @@ struct DiceView: View {
         HStack {
             Image(systemName: imageName)
                 .accessibilityIdentifier("hintImage")
-            Text(text).presentationCompactAdaptation(.popover)
+            Text(text)
+                .presentationCompactAdaptation(.popover)
                 .accessibilityIdentifier("hintText")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
