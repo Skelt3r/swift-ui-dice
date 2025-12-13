@@ -93,6 +93,7 @@ struct DiceView: View {
                         .foregroundStyle(primaryColor)
                         .accessibilityIdentifier("colorMenuButton")
                 }
+                .buttonStyle(.plain)
                 .foregroundStyle(adjustColor())
                 .font(.title2)
                 .padding(.horizontal, 40)
@@ -134,6 +135,7 @@ struct DiceView: View {
                     .padding(.horizontal)
                     .accessibilityIdentifier("diceMenuLabel")
             }
+            .buttonStyle(.plain)
         }.padding(.top)
     }
     
@@ -356,6 +358,7 @@ struct DiceView: View {
                 .padding()
             }
         )
+        .buttonStyle(.plain)
         .padding()
     }
     
@@ -384,7 +387,8 @@ struct DiceView: View {
             primaryColor = option
         } label: {
             Text(option.description.capitalized)
-        }.accessibilityIdentifier("\(option)ColorButton")
+        }
+        .accessibilityIdentifier("\(option)ColorButton")
     }
     
     // MARK: X Button
