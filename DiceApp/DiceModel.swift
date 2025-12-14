@@ -21,20 +21,3 @@ struct Result: Identifiable {
     let id = UUID()
     let content: Int
 }
-
-var colorOptions: [Color] {
-    [
-        .red,
-        .pink,
-        .orange,
-        .yellow,
-        .green,
-        .blue,
-        .cyan,
-        .mint,
-        .teal,
-        .purple,
-        .indigo,
-        .brown
-    ]
-}

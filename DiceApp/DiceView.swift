@@ -29,21 +29,23 @@ struct DiceView: View {
     // MARK: Views
     
     var body: some View {
-        VStack {
-            settingsSheet()
-            diceMenu()
-            diceAmountInput()
-            rollModifierInput()
-            sumLabel()
-            resultsSheet()
-            rollButton()
-            inputLabel()
-            helpButton()
-            Spacer()
+        ScrollView {
+            VStack {
+                settingsSheet()
+                diceMenu()
+                diceAmountInput()
+                rollModifierInput()
+                sumLabel()
+                resultsSheet()
+                rollButton()
+                inputLabel()
+                helpButton()
+                Spacer()
+            }
+            .preferredColorScheme(darkMode ? .dark : .light)
+            .font(.largeTitle)
+            .padding()
         }
-        .preferredColorScheme(darkMode ? .dark : .light)
-        .font(.largeTitle)
-        .padding()
     }
     
     // MARK: Settings Sheet
@@ -61,45 +63,45 @@ struct DiceView: View {
             content: {
                 
                 // MARK: Dark Mode Toggle
-                
-                Toggle(
-                    isOn: $darkMode,
-                    label: {
-                        HStack {
-                            Image(systemName: "moon.circle")
-                            Text("Dark Mode")
-                                .font(.title2)
+                ScrollView {
+                    Toggle(
+                        isOn: $darkMode,
+                        label: {
+                            HStack {
+                                Image(systemName: "moon.circle")
+                                Text("Dark Mode")
+                                    .font(.title2)
+                            }
                         }
+                    )
+                    .tint(primaryColor)
+                    .preferredColorScheme(darkMode ? .dark : .light)
+                    .padding(.horizontal, 40)
+                    .padding(.top, 50)
+                    .accessibilityIdentifier("darkModeToggle")
+                    
+                    // MARK: Color Menu
+                    
+                    Menu {
+                        ForEach(0..<Color.options.count, id: \.self) { index in
+                            colorButton(Color.options[index])
+                        }
+                    } label: {
+                        Image(systemName: "rainbow")
+                        Text("Primary Color")
+                        Spacer()
+                        Circle()
+                            .frame(width: 48, height: 32)
+                            .foregroundStyle(primaryColor)
+                            .accessibilityIdentifier("colorMenuButton")
                     }
-                )
-                .tint(primaryColor)
-                .preferredColorScheme(darkMode ? .dark : .light)
-                .padding(.horizontal, 40)
-                .padding(.top, 50)
-                .accessibilityIdentifier("darkModeToggle")
-                
-                // MARK: Color Menu
-                
-                Menu {
-                    ForEach(0..<colorOptions.count, id: \.self) { index in
-                        colorButton(colorOptions[index])
-                    }
-                } label: {
-                    Image(systemName: "rainbow")
-                    Text("Primary Color")
+                    .foregroundStyle(adjustColor())
+                    .font(.title2)
+                    .padding(.horizontal, 40)
+                    .padding(.top, 20)
+                    
                     Spacer()
-                    Circle()
-                        .frame(width: 48, height: 32)
-                        .foregroundStyle(primaryColor)
-                        .accessibilityIdentifier("colorMenuButton")
                 }
-                .buttonStyle(.plain)
-                .foregroundStyle(adjustColor())
-                .font(.title2)
-                .padding(.horizontal, 40)
-                .padding(.top, 20)
-
-                Spacer()
                 
                 // MARK: X Button
                 
@@ -134,8 +136,8 @@ struct DiceView: View {
                     .onChange(of: diceType, { resetResults() })
                     .padding(.horizontal)
                     .accessibilityIdentifier("diceMenuLabel")
-            }
-            .buttonStyle(.plain)
+                
+            }.buttonStyle(.plain)
         }.padding(.top)
     }
     
