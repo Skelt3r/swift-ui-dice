@@ -1,15 +1,15 @@
 //
-//  DiceAppUITests.swift
-//  DiceAppUITests
+//  DiceUITests.swift
+//  DiceUITests
 //
 //  Created by Chris Allen on 7/10/24.
 //
 
 import XCTest
 
-class DiceAppUITests: XCTestCase {
+class DiceUITests: XCTestCase {
     
-    let app = DiceAppScreen().app
+    let app = DiceScreen().app
     
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -21,14 +21,14 @@ class DiceAppUITests: XCTestCase {
     }
     
     func test_rollSingleDice() throws {
-        DiceAppScreen()
+        DiceScreen()
             .tapRollButton()
             .validateActiveSumLabel()
             .validateInputLabel("You rolled 1d20")
     }
     
     func test_rollMultipleDice() throws {
-        DiceAppScreen()
+        DiceScreen()
             .selectDiceType(.d6)
             .validateDiceTypeLabel(.d6)
             .increaseDiceAmount(by: 3)
@@ -39,7 +39,7 @@ class DiceAppUITests: XCTestCase {
     }
     
     func test_addPositiveRollModifier() throws {
-        DiceAppScreen()
+        DiceScreen()
             .increaseRollModifier(by: 1)
             .validateRollModifierLabel(1)
             .tapRollButton()
@@ -48,7 +48,7 @@ class DiceAppUITests: XCTestCase {
     }
     
     func test_addNegativeRollModifier() throws {
-        DiceAppScreen()
+        DiceScreen()
             .selectDiceType(.d4)
             .increaseDiceAmount(by: 1)
             .decreaseRollModifier(by: 1)
@@ -58,7 +58,7 @@ class DiceAppUITests: XCTestCase {
     }
     
     func test_resetDiceAmount() throws {
-        DiceAppScreen()
+        DiceScreen()
             .increaseDiceAmount(by: 3)
             .tapRollButton()
             .resetDiceAmount()
@@ -68,7 +68,7 @@ class DiceAppUITests: XCTestCase {
     }
     
     func test_resetRollModifier() throws {
-        DiceAppScreen()
+        DiceScreen()
             .increaseRollModifier(by: 3)
             .tapRollButton()
             .resetRollModifier()
@@ -78,26 +78,26 @@ class DiceAppUITests: XCTestCase {
     }
     
     func test_openSettingsMenu() throws {
-        DiceAppScreen()
+        DiceScreen()
             .tapSettingsButton()
             .validateSettingsSheet()
     }
     
     func test_openResultsList() throws {
-        DiceAppScreen()
+        DiceScreen()
             .selectDiceType(.d12)
             .increaseDiceAmount(by: 3)
             .increaseRollModifier(by: 1)
             .tapRollButton()
             .tapResultsButton()
             .validateResultsList(
-                hasLabel: /You rolled 4d12\+1 -> (\d+)/,
-                hasLength: 4
+                hasInput: "You rolled 4d12+1",
+                hasOutput: /\(\d+\+\d+\+\d+\+\d+\)\+1 = \d+/
             )
     }
     
     func test_openHintBox() throws {
-        DiceAppScreen()
+        DiceScreen()
             .tapHelpButton()
             .validateHintBox()
     }

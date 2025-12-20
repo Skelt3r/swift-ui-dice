@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BCA5D2902C8CC3A600C8EE60 /* DiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6EFF42C2872640090C606 /* DiceModel.swift */; };
-		BCB2A4C22C3F75B600111B9A /* DiceAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4C12C3F75B600111B9A /* DiceAppUITests.swift */; };
-		BCB2A4CB2C3F7F9800111B9A /* DiceAppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4CA2C3F7F9800111B9A /* DiceAppScreen.swift */; };
+		BCB2A4C22C3F75B600111B9A /* DiceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4C12C3F75B600111B9A /* DiceUITests.swift */; };
+		BCB2A4CB2C3F7F9800111B9A /* DiceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4CA2C3F7F9800111B9A /* DiceScreen.swift */; };
 		BCB2A4CF2C4452CB00111B9A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2A4CE2C4452CB00111B9A /* Color.swift */; };
 		BCE6EFE62C2270030090C606 /* DiceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6EFE52C2270030090C606 /* DiceApp.swift */; };
 		BCE6EFE82C2270030090C606 /* DiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6EFE72C2270030090C606 /* DiceView.swift */; };
@@ -29,15 +29,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BCB2A4BF2C3F75B600111B9A /* DiceAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiceAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCB2A4C12C3F75B600111B9A /* DiceAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceAppUITests.swift; sourceTree = "<group>"; };
-		BCB2A4CA2C3F7F9800111B9A /* DiceAppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceAppScreen.swift; sourceTree = "<group>"; };
+		BC447B782EF73D6B003FB490 /* SimpleDice.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SimpleDice.xctestplan; sourceTree = "<group>"; };
+		BCB2A4BF2C3F75B600111B9A /* SimpleDiceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleDiceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCB2A4C12C3F75B600111B9A /* DiceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceUITests.swift; sourceTree = "<group>"; };
+		BCB2A4CA2C3F7F9800111B9A /* DiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceScreen.swift; sourceTree = "<group>"; };
 		BCB2A4CE2C4452CB00111B9A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		BCE6EFE22C2270030090C606 /* DiceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCE6EFE22C2270030090C606 /* SimpleDice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE6EFE52C2270030090C606 /* DiceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceApp.swift; sourceTree = "<group>"; };
 		BCE6EFE72C2270030090C606 /* DiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceView.swift; sourceTree = "<group>"; };
 		BCE6EFE92C2270040090C606 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BCE6EFEB2C2270040090C606 /* DiceApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiceApp.entitlements; sourceTree = "<group>"; };
+		BCE6EFEB2C2270040090C606 /* SimpleDice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleDice.entitlements; sourceTree = "<group>"; };
 		BCE6EFED2C2270040090C606 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BCE6EFF42C2872640090C606 /* DiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,20 +61,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BCB2A4C02C3F75B600111B9A /* DiceAppUITests */ = {
+		BCB2A4C02C3F75B600111B9A /* DiceUITests */ = {
 			isa = PBXGroup;
 			children = (
-				BCB2A4C12C3F75B600111B9A /* DiceAppUITests.swift */,
-				BCB2A4CA2C3F7F9800111B9A /* DiceAppScreen.swift */,
+				BCB2A4C12C3F75B600111B9A /* DiceUITests.swift */,
+				BCB2A4CA2C3F7F9800111B9A /* DiceScreen.swift */,
 			);
-			path = DiceAppUITests;
+			path = DiceUITests;
 			sourceTree = "<group>";
 		};
 		BCE6EFD92C2270030090C606 = {
 			isa = PBXGroup;
 			children = (
-				BCE6EFE42C2270030090C606 /* DiceApp */,
-				BCB2A4C02C3F75B600111B9A /* DiceAppUITests */,
+				BC447B782EF73D6B003FB490 /* SimpleDice.xctestplan */,
+				BCE6EFE42C2270030090C606 /* SimpleDice */,
+				BCB2A4C02C3F75B600111B9A /* DiceUITests */,
 				BCE6EFE32C2270030090C606 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,13 +83,13 @@
 		BCE6EFE32C2270030090C606 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BCE6EFE22C2270030090C606 /* DiceApp.app */,
-				BCB2A4BF2C3F75B600111B9A /* DiceAppUITests.xctest */,
+				BCE6EFE22C2270030090C606 /* SimpleDice.app */,
+				BCB2A4BF2C3F75B600111B9A /* SimpleDiceUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BCE6EFE42C2270030090C606 /* DiceApp */ = {
+		BCE6EFE42C2270030090C606 /* SimpleDice */ = {
 			isa = PBXGroup;
 			children = (
 				BCE6EFE52C2270030090C606 /* DiceApp.swift */,
@@ -95,10 +97,10 @@
 				BCE6EFE72C2270030090C606 /* DiceView.swift */,
 				BCB2A4CE2C4452CB00111B9A /* Color.swift */,
 				BCE6EFE92C2270040090C606 /* Assets.xcassets */,
-				BCE6EFEB2C2270040090C606 /* DiceApp.entitlements */,
+				BCE6EFEB2C2270040090C606 /* SimpleDice.entitlements */,
 				BCE6EFEC2C2270040090C606 /* Preview Content */,
 			);
-			path = DiceApp;
+			path = SimpleDice;
 			sourceTree = "<group>";
 		};
 		BCE6EFEC2C2270040090C606 /* Preview Content */ = {
@@ -112,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BCB2A4BE2C3F75B600111B9A /* DiceAppUITests */ = {
+		BCB2A4BE2C3F75B600111B9A /* SimpleDiceUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BCB2A4C72C3F75B600111B9A /* Build configuration list for PBXNativeTarget "DiceAppUITests" */;
+			buildConfigurationList = BCB2A4C72C3F75B600111B9A /* Build configuration list for PBXNativeTarget "SimpleDiceUITests" */;
 			buildPhases = (
 				BCB2A4BB2C3F75B600111B9A /* Sources */,
 				BCB2A4BC2C3F75B600111B9A /* Frameworks */,
@@ -125,14 +127,14 @@
 			dependencies = (
 				BCB2A4C62C3F75B600111B9A /* PBXTargetDependency */,
 			);
-			name = DiceAppUITests;
+			name = SimpleDiceUITests;
 			productName = DiceAppUITests;
-			productReference = BCB2A4BF2C3F75B600111B9A /* DiceAppUITests.xctest */;
+			productReference = BCB2A4BF2C3F75B600111B9A /* SimpleDiceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		BCE6EFE12C2270030090C606 /* DiceApp */ = {
+		BCE6EFE12C2270030090C606 /* SimpleDice */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BCE6EFF12C2270040090C606 /* Build configuration list for PBXNativeTarget "DiceApp" */;
+			buildConfigurationList = BCE6EFF12C2270040090C606 /* Build configuration list for PBXNativeTarget "SimpleDice" */;
 			buildPhases = (
 				BCE6EFDE2C2270030090C606 /* Sources */,
 				BCE6EFDF2C2270030090C606 /* Frameworks */,
@@ -142,9 +144,9 @@
 			);
 			dependencies = (
 			);
-			name = DiceApp;
+			name = SimpleDice;
 			productName = DiceApp;
-			productReference = BCE6EFE22C2270030090C606 /* DiceApp.app */;
+			productReference = BCE6EFE22C2270030090C606 /* SimpleDice.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -155,7 +157,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					BCB2A4BE2C3F75B600111B9A = {
 						CreatedOnToolsVersion = 15.4;
@@ -166,7 +168,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BCE6EFDD2C2270030090C606 /* Build configuration list for PBXProject "DiceApp" */;
+			buildConfigurationList = BCE6EFDD2C2270030090C606 /* Build configuration list for PBXProject "SimpleDice" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -179,8 +181,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BCE6EFE12C2270030090C606 /* DiceApp */,
-				BCB2A4BE2C3F75B600111B9A /* DiceAppUITests */,
+				BCE6EFE12C2270030090C606 /* SimpleDice */,
+				BCB2A4BE2C3F75B600111B9A /* SimpleDiceUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -209,8 +211,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCB2A4CB2C3F7F9800111B9A /* DiceAppScreen.swift in Sources */,
-				BCB2A4C22C3F75B600111B9A /* DiceAppUITests.swift in Sources */,
+				BCB2A4CB2C3F7F9800111B9A /* DiceScreen.swift in Sources */,
+				BCB2A4C22C3F75B600111B9A /* DiceUITests.swift in Sources */,
 				BCA5D2902C8CC3A600C8EE60 /* DiceModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,7 +233,7 @@
 /* Begin PBXTargetDependency section */
 		BCB2A4C62C3F75B600111B9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BCE6EFE12C2270030090C606 /* DiceApp */;
+			target = BCE6EFE12C2270030090C606 /* SimpleDice */;
 			targetProxy = BCB2A4C52C3F75B600111B9A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -245,7 +247,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chris.DiceAppUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skelt3r.simpledice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -255,7 +257,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = DiceApp;
+				TEST_TARGET_NAME = SimpleDice;
 			};
 			name = Debug;
 		};
@@ -267,7 +269,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chris.DiceAppUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skelt3r.simpledice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -277,7 +279,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = DiceApp;
+				TEST_TARGET_NAME = SimpleDice;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -316,6 +318,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -338,6 +341,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -377,6 +381,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -392,6 +397,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -401,11 +407,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DiceApp/DiceApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SimpleDice/SimpleDice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DiceApp/Preview Content\"";
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleDice/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.dice-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -423,7 +432,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chris.DiceApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skelt3r.simpledice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -439,11 +448,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DiceApp/DiceApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SimpleDice/SimpleDice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DiceApp/Preview Content\"";
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleDice/Preview Content\"";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.dice-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -461,7 +473,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = chris.DiceApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skelt3r.simpledice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -475,7 +487,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BCB2A4C72C3F75B600111B9A /* Build configuration list for PBXNativeTarget "DiceAppUITests" */ = {
+		BCB2A4C72C3F75B600111B9A /* Build configuration list for PBXNativeTarget "SimpleDiceUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BCB2A4C82C3F75B600111B9A /* Debug */,
@@ -484,7 +496,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BCE6EFDD2C2270030090C606 /* Build configuration list for PBXProject "DiceApp" */ = {
+		BCE6EFDD2C2270030090C606 /* Build configuration list for PBXProject "SimpleDice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BCE6EFEF2C2270040090C606 /* Debug */,
@@ -493,7 +505,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BCE6EFF12C2270040090C606 /* Build configuration list for PBXNativeTarget "DiceApp" */ = {
+		BCE6EFF12C2270040090C606 /* Build configuration list for PBXNativeTarget "SimpleDice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BCE6EFF22C2270040090C606 /* Debug */,

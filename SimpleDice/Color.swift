@@ -1,6 +1,6 @@
 //
 //  Color.swift
-//  DiceApp
+//  SimpleDice
 //
 //  Created by Chris Allen on 7/14/24.
 //

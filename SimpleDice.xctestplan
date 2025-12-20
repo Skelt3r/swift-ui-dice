@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "F29F534B-1924-4CFD-B51C-AC7D1DE97848",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SimpleDice.xcodeproj",
+      "identifier" : "BCE6EFE12C2270030090C606",
+      "name" : "SimpleDice"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SimpleDice.xcodeproj",
+        "identifier" : "BCB2A4BE2C3F75B600111B9A",
+        "name" : "SimpleDiceUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

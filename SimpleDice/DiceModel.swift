@@ -1,6 +1,6 @@
 //
 //  DiceModel.swift
-//  DiceApp
+//  SimpleDice
 //
 //  Created by Chris Allen on 6/23/24.
 //

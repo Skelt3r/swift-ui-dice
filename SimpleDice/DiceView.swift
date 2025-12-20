@@ -1,6 +1,6 @@
 //
 //  DiceView.swift
-//  DiceApp
+//  SimpleDice
 //
 //  Created by Chris Allen on 6/18/24.
 //
@@ -246,15 +246,12 @@ struct DiceView: View {
                         
                         // MARK: Input Label
                         
-                        VStack {
-                            Text(showInputMessage())
-                                .padding(.top, 50)
-                                .accessibilityIdentifier("resultsListInput")
-                            Text("(\(results.map { String($0.content) }.joined(separator: "+")))+\(rollModifier) = \(sum)")
-                                .padding(25)
-                                .accessibilityIdentifier("resultsListInput")
-                        }
-                        .accessibilityIdentifier("resultsListOutput")
+                        Text(showInputMessage())
+                            .padding(.top, 50)
+                            .accessibilityIdentifier("resultsListInput")
+                        Text("(\(results.map { String($0.content) }.joined(separator: "+")))+\(rollModifier) = \(sum)")
+                            .padding(25)
+                            .accessibilityIdentifier("resultsListOutput")
                         
                     } else {
                         

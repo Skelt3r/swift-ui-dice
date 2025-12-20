@@ -1,6 +1,6 @@
 //
-//  DiceAppScreen.swift
-//  DiceAppUITests
+//  DiceScreen.swift
+//  DiceUITests
 //
 //  Created by Chris Allen on 7/10/24.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import XCTest
 
-class DiceAppScreen {
+class DiceScreen {
     
     // MARK: Elements
     
@@ -34,8 +34,8 @@ class DiceAppScreen {
     private lazy var sumLabel = app.staticTexts["sumLabel"]
     
     private lazy var resultsButton = app.buttons["resultsButton"]
-    private lazy var resultsListInputAndOutput = app.staticTexts["resultsListInputAndOutput"]
-    private lazy var resultsList = app.collectionViews["resultsList"]
+    private lazy var resultsListInput = app.staticTexts["resultsListInput"]
+    private lazy var resultsListOutput = app.staticTexts["resultsListOutput"]
     private lazy var xButtonResults = app.buttons["xButtonResults"]
     
     private lazy var rollButton = app.buttons["rollButton"]
@@ -45,7 +45,7 @@ class DiceAppScreen {
     private lazy var hintImage = app.images.matching(identifier: "hintImage")
     private lazy var hintText = app.staticTexts.matching(identifier: "hintText")
     
-    // MARK: Actions
+    // MARK: Interactions
     
     @discardableResult
     func tapSettingsButton() -> Self {
@@ -195,9 +195,9 @@ class DiceAppScreen {
     }
     
     @discardableResult
-    func validateResultsList(hasLabel: any RegexComponent, hasLength: Int) -> Self {
-        XCTAssertTrue(resultsListInputAndOutput.label.contains(hasLabel))
-        XCTAssertTrue(resultsList.exists)
+    func validateResultsList(hasInput input: String, hasOutput output: any RegexComponent) -> Self {
+        XCTAssertEqual(resultsListInput.label, input)
+        XCTAssertTrue(resultsListOutput.label.contains(output))
         XCTAssert(xButtonResults.isHittable)
         return self
     }
