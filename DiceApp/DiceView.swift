@@ -109,6 +109,7 @@ struct DiceView: View {
                     binding: $settingsSheetIsVisible,
                     accessibilityId: "xButtonSettings"
                 )
+                .presentationDetents([.medium, .large])
             }
         )
         .padding()
@@ -240,49 +241,42 @@ struct DiceView: View {
         }.sheet(
             isPresented: $resultsSheetIsVisible,
             content: {
-                if diceAmount > 0, results.count > 0 {
-                    
-                    // MARK: Input Label
-                    
-                    Text("\(showInputMessage()) -> \(sum)")
-                        .font(.title2)
-                        .foregroundStyle(adjustColor())
-                        .padding(50)
-                        .accessibilityIdentifier("resultsListInputAndOutput")
-                    
-                    Divider()
-                    
-                    // MARK: Results List
-                    
-                    List(results, id: \.id) { result in
-                        GeometryReader { geometry in
-                            VStack(alignment: .center) {
-                                Text(result.content.description)
-                            }
-                            .frame(width: geometry.size.width)
+                VStack {
+                    if diceAmount > 0, results.count > 0 {
+                        
+                        // MARK: Input Label
+                        
+                        VStack {
+                            Text(showInputMessage())
+                                .padding(.top, 50)
+                                .accessibilityIdentifier("resultsListInput")
+                            Text("(\(results.map { String($0.content) }.joined(separator: "+")))+\(rollModifier) = \(sum)")
+                                .padding(25)
+                                .accessibilityIdentifier("resultsListInput")
                         }
+                        .accessibilityIdentifier("resultsListOutput")
+                        
+                    } else {
+                        
+                        // MARK: Placeholder
+                        
+                        Text("You haven't rolled any dice.")
+                            .padding(.top, 50)
                     }
-                    .scrollContentBackground(.hidden)
-                    .font(.title)
-                    .accessibilityIdentifier("resultsList")
-                    
-                } else {
-                    
-                    // MARK: Placeholder
-                    
-                    Text("You haven't rolled any dice.")
-                        .font(.headline)
-                        .padding(.top, 50)
                     
                     Spacer()
+                    
+                    // MARK: X Button
+                    
+                    xButton(
+                        binding: $resultsSheetIsVisible,
+                        accessibilityId: "xButtonResults"
+                    )
+                    .font(.largeTitle)
                 }
-                
-                // MARK: X Button
-                
-                xButton(
-                    binding: $resultsSheetIsVisible,
-                    accessibilityId: "xButtonResults"
-                )
+                .font(.title2)
+                .foregroundStyle(adjustColor())
+                .presentationDetents([.medium, .large])
             }
         ).padding(.top)
     }
