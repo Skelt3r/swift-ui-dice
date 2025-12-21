@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		BC447B782EF73D6B003FB490 /* SimpleDice.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SimpleDice.xctestplan; sourceTree = "<group>"; };
+		BC447B792EF77A45003FB490 /* privacy.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = privacy.txt; sourceTree = "<group>"; };
 		BCB2A4BF2C3F75B600111B9A /* SimpleDiceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleDiceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCB2A4C12C3F75B600111B9A /* DiceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceUITests.swift; sourceTree = "<group>"; };
 		BCB2A4CA2C3F7F9800111B9A /* DiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceScreen.swift; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		BCE6EFD92C2270030090C606 = {
 			isa = PBXGroup;
 			children = (
+				BC447B792EF77A45003FB490 /* privacy.txt */,
 				BC447B782EF73D6B003FB490 /* SimpleDice.xctestplan */,
 				BCE6EFE42C2270030090C606 /* SimpleDice */,
 				BCB2A4C02C3F75B600111B9A /* DiceUITests */,
