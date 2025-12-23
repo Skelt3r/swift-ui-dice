@@ -43,6 +43,7 @@ struct DiceView: View {
                 Spacer()
             }
             .preferredColorScheme(darkMode ? .dark : .light)
+            .minimumScaleFactor(0.5)
             .font(.largeTitle)
             .padding()
         }
@@ -64,6 +65,7 @@ struct DiceView: View {
                 
                 // MARK: Dark Mode Toggle
                 ScrollView {
+                    Spacer()
                     Toggle(
                         isOn: $darkMode,
                         label: {
@@ -163,8 +165,9 @@ struct DiceView: View {
                     .foregroundStyle(primaryColor)
             }
             
-            Stepper("\(diceAmount)", value: $diceAmount, in: 1...100)
+            Stepper("\(diceAmount)", value: $diceAmount, in: 1...999)
                 .frame(maxWidth: .infinity)
+                .lineLimit(1)
                 .onChange(of: diceAmount, { resetResults() })
                 .padding(.horizontal)
                 .accessibilityIdentifier("diceAmountStepper")
@@ -192,8 +195,9 @@ struct DiceView: View {
                     .foregroundStyle(primaryColor)
             }
             
-            Stepper("\(rollModifier)", value: $rollModifier, in: -100...100)
+            Stepper("\(rollModifier)", value: $rollModifier, in: -999...999)
                 .frame(maxWidth: .infinity)
+                .lineLimit(1)
                 .onChange(of: rollModifier, { resetResults() })
                 .padding(.horizontal)
                 .accessibilityIdentifier("rollModifierStepper")
@@ -243,18 +247,18 @@ struct DiceView: View {
             content: {
                 VStack {
                     if diceAmount > 0, results.count > 0 {
-                        
                         // MARK: Input Label
                         
                         Text(showInputMessage())
                             .padding(.top, 50)
                             .accessibilityIdentifier("resultsListInput")
-                        Text("(\(results.map { String($0.content) }.joined(separator: "+")))+\(rollModifier) = \(sum)")
-                            .padding(25)
-                            .accessibilityIdentifier("resultsListOutput")
                         
+                        ScrollView {
+                            Text("(\(results.map { String($0.content) }.joined(separator: "+")))+\(rollModifier) = \(sum)")
+                                .padding(25)
+                                .accessibilityIdentifier("resultsListOutput")
+                        }
                     } else {
-                        
                         // MARK: Placeholder
                         
                         Text("You haven't rolled any dice.")
