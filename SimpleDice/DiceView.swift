@@ -23,6 +23,7 @@ struct DiceView: View {
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
+    @AppStorage("isHaptic") private var isHaptic: Bool = true
     @AppStorage("darkMode") private var darkMode: Bool = false
     @AppStorage("primaryColor") private var primaryColor: Color = .red
     
@@ -59,7 +60,11 @@ struct DiceView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .foregroundStyle(primaryColor)
                 .imageScale(.large)
-        }.sheet(
+        }
+        .sensoryFeedback(.selection, trigger: shake) {
+            oldValue, newValue in isHaptic
+        }
+        .sheet(
             isPresented: $settingsSheetIsVisible,
             content: {
                 
@@ -76,11 +81,33 @@ struct DiceView: View {
                             }
                         }
                     )
+                    .sensoryFeedback(.selection, trigger: shake) {
+                        oldValue, newValue in isHaptic
+                    }
                     .tint(primaryColor)
                     .preferredColorScheme(darkMode ? .dark : .light)
                     .padding(.horizontal, 40)
                     .padding(.top, 50)
                     .accessibilityIdentifier("darkModeToggle")
+                    
+                    Toggle(
+                        isOn: $isHaptic,
+                        label: {
+                            HStack {
+                                Image(systemName: "iphone.gen3.circle")
+                                Text("Haptic Feedback")
+                                    .font(.title2)
+                            }
+                        }
+                    )
+                    .sensoryFeedback(.selection, trigger: shake) {
+                        oldValue, newValue in isHaptic
+                    }
+                    .tint(primaryColor)
+                    .preferredColorScheme(darkMode ? .dark : .light)
+                    .padding(.horizontal, 40)
+                    .padding(.top, 20)
+                    .accessibilityIdentifier("hapticToggle")
                     
                     // MARK: Color Menu
                     
@@ -96,6 +123,9 @@ struct DiceView: View {
                             .frame(width: 48, height: 32)
                             .foregroundStyle(primaryColor)
                             .accessibilityIdentifier("colorMenuButton")
+                    }
+                    .sensoryFeedback(.selection, trigger: shake) {
+                        oldValue, newValue in isHaptic
                     }
                     .foregroundStyle(adjustColor())
                     .font(.title2)
@@ -140,7 +170,11 @@ struct DiceView: View {
                     .padding(.horizontal)
                     .accessibilityIdentifier("diceMenuLabel")
                 
-            }.buttonStyle(.plain)
+            }
+            .sensoryFeedback(.selection, trigger: shake) {
+                oldValue, newValue in isHaptic
+            }
+            .buttonStyle(.plain)
         }.padding(.top)
     }
     
@@ -154,6 +188,9 @@ struct DiceView: View {
                     diceAmount = 1
                 } label: {
                     Image(systemName: "arrow.clockwise.circle.fill")
+                        .sensoryFeedback(.selection, trigger: shake) {
+                            oldValue, newValue in isHaptic
+                        }
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .foregroundStyle(.gray)
                         .accessibilityIdentifier("diceAmountResetButton")
@@ -166,6 +203,9 @@ struct DiceView: View {
             }
             
             Stepper("\(diceAmount)", value: $diceAmount, in: 1...999)
+                .sensoryFeedback(.selection, trigger: shake) {
+                    oldValue, newValue in isHaptic
+                }
                 .frame(maxWidth: .infinity)
                 .lineLimit(1)
                 .onChange(of: diceAmount, { resetResults() })
@@ -187,7 +227,11 @@ struct DiceView: View {
                     Image(systemName: "arrow.clockwise.circle.fill")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .foregroundStyle(.gray)
-                }.accessibilityIdentifier("rollModifierResetButton")
+                }
+                .sensoryFeedback(.selection, trigger: shake) {
+                    oldValue, newValue in isHaptic
+                }
+                .accessibilityIdentifier("rollModifierResetButton")
                 
                 Image(systemName: "plus.forwardslash.minus")
                     .frame(maxWidth: .infinity, minHeight: 1, alignment: .trailing)
@@ -196,6 +240,9 @@ struct DiceView: View {
             }
             
             Stepper("\(rollModifier)", value: $rollModifier, in: -999...999)
+                .sensoryFeedback(.selection, trigger: shake) {
+                    oldValue, newValue in isHaptic
+                }
                 .frame(maxWidth: .infinity)
                 .lineLimit(1)
                 .onChange(of: rollModifier, { resetResults() })
@@ -242,7 +289,11 @@ struct DiceView: View {
                     .padding(.horizontal, 10)
                     .accessibilityIdentifier("resultsButton")
             }
-        }.sheet(
+        }
+        .sensoryFeedback(.selection, trigger: shake) {
+            oldValue, newValue in isHaptic
+        }
+        .sheet(
             isPresented: $resultsSheetIsVisible,
             content: {
                 VStack {
@@ -312,6 +363,9 @@ struct DiceView: View {
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.roundedRectangle)
+        .sensoryFeedback(.impact, trigger: shake) {
+            oldValue, newValue in isHaptic
+        }
         .tint(primaryColor)
         .padding(.top, 40)
         .accessibilityIdentifier("rollButton")
@@ -338,6 +392,9 @@ struct DiceView: View {
                 .foregroundStyle(primaryColor)
                 .imageScale(.large)
                 .accessibilityIdentifier("helpButton")
+        }
+        .sensoryFeedback(.selection, trigger: shake) {
+            oldValue, newValue in isHaptic
         }
         .popover(
             isPresented: $hintsAreVisible,
@@ -372,6 +429,9 @@ struct DiceView: View {
             Text(option.rawValue)
                 .accessibilityIdentifier("\(option)DiceButton")
         }
+        .sensoryFeedback(.selection, trigger: shake) {
+            oldValue, newValue in isHaptic
+        }
     }
     
     // MARK: Color Button
@@ -384,6 +444,9 @@ struct DiceView: View {
             primaryColor = option
         } label: {
             Text(option.description.capitalized)
+        }
+        .sensoryFeedback(.selection, trigger: shake) {
+            oldValue, newValue in isHaptic
         }
         .accessibilityIdentifier("\(option)ColorButton")
     }
@@ -402,6 +465,9 @@ struct DiceView: View {
             Image(systemName: "x.circle.fill")
                 .imageScale(.large)
                 .foregroundStyle(primaryColor)
+        }
+        .sensoryFeedback(.selection, trigger: shake) {
+            oldValue, newValue in isHaptic
         }
         .padding(10)
         .accessibilityIdentifier(accessibilityId)
