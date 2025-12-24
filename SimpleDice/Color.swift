@@ -22,8 +22,7 @@ extension Color: @retroactive RawRepresentable {
                     .unarchivedObject(
                         ofClass: UIColor.self,
                         from: data
-                    )
-                ?? .black
+                    ) ?? .black
             )
         } catch {
             self = .black
