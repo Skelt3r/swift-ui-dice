@@ -1,5 +1,3 @@
-A dice roller app for iOS built in SwiftUI.
+[<img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1766361600)">](https://apps.apple.com/us/app/a-simple-dice-roller/id6756828336?itscg=30200&itsct=apps_box_badge&mttnsubad=6756828336)
 
----
-
-<img width="300" height="700" alt="dice-app" src="https://github.com/user-attachments/assets/48392e43-2790-4fe6-9ec0-233bc1e39e09" />
+A dice roller app for iOS built with SwiftUI.
