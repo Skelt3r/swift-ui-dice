@@ -67,6 +67,7 @@
 			children = (
 				BCB2A4C12C3F75B600111B9A /* DiceUITests.swift */,
 				BCB2A4CA2C3F7F9800111B9A /* DiceScreen.swift */,
+				BC447B782EF73D6B003FB490 /* SimpleDice.xctestplan */,
 			);
 			path = DiceUITests;
 			sourceTree = "<group>";
@@ -75,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				BC447B792EF77A45003FB490 /* privacy.txt */,
-				BC447B782EF73D6B003FB490 /* SimpleDice.xctestplan */,
 				BCE6EFE42C2270030090C606 /* SimpleDice */,
 				BCB2A4C02C3F75B600111B9A /* DiceUITests */,
 				BCE6EFE32C2270030090C606 /* Products */,

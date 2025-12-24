@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:SimpleDice.xctestplan"
+            reference = "container:DiceUITests/SimpleDice.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
