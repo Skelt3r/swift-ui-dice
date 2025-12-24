@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct DiceView: View {
-    
     // MARK: States
     
-    @State internal var diceType: Dice = .d20
+    @State internal var dice: Dice = .d20
     @State internal var diceAmount: Int = 1
     @State internal var rollModifier: Int = 0
     @State internal var sum: Int = 0
-    @State internal var results: [Result] = []
+    @State internal var results: [Dice.Result] = []
     @State internal var resultsSheetIsVisible: Bool = false
     @State internal var settingsSheetIsVisible: Bool = false
     @State internal var hintsAreVisible: Bool = false
     @State internal var shake: Bool = false
     
-    @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    
     @AppStorage("isHaptic") private var isHaptic: Bool = true
     @AppStorage("darkMode") private var darkMode: Bool = false
     @AppStorage("primaryColor") private var primaryColor: Color = .red
     
-    // MARK: Views
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
+    
+    // MARK: Body
     
     var body: some View {
         ScrollView {
@@ -61,7 +60,7 @@ struct DiceView: View {
                 .foregroundStyle(primaryColor)
                 .imageScale(.large)
         }
-        .sensoryFeedback(.selection, trigger: shake) {
+        .sensoryFeedback(.selection, trigger: settingsSheetIsVisible) {
             oldValue, newValue in isHaptic
         }
         .sheet(
@@ -81,7 +80,7 @@ struct DiceView: View {
                             }
                         }
                     )
-                    .sensoryFeedback(.selection, trigger: shake) {
+                    .sensoryFeedback(.selection, trigger: darkMode) {
                         oldValue, newValue in isHaptic
                     }
                     .tint(primaryColor)
@@ -100,7 +99,7 @@ struct DiceView: View {
                             }
                         }
                     )
-                    .sensoryFeedback(.selection, trigger: shake) {
+                    .sensoryFeedback(.selection, trigger: isHaptic) {
                         oldValue, newValue in isHaptic
                     }
                     .tint(primaryColor)
@@ -124,7 +123,7 @@ struct DiceView: View {
                             .foregroundStyle(primaryColor)
                             .accessibilityIdentifier("colorMenuButton")
                     }
-                    .sensoryFeedback(.selection, trigger: shake) {
+                    .sensoryFeedback(.selection, trigger: primaryColor) {
                         oldValue, newValue in isHaptic
                     }
                     .foregroundStyle(adjustColor())
@@ -162,16 +161,16 @@ struct DiceView: View {
                     .imageScale(.large)
                     .foregroundColor(primaryColor)
                 
-                Text(diceType.rawValue)
+                Text(dice.rawValue)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .gridCellAnchor(.leading)
                     .foregroundStyle(adjustColor())
-                    .onChange(of: diceType, { resetResults() })
+                    .onChange(of: dice, { resetResults() })
                     .padding(.horizontal)
                     .accessibilityIdentifier("diceMenuLabel")
                 
             }
-            .sensoryFeedback(.selection, trigger: shake) {
+            .sensoryFeedback(.selection, trigger: dice) {
                 oldValue, newValue in isHaptic
             }
             .buttonStyle(.plain)
@@ -188,7 +187,7 @@ struct DiceView: View {
                     diceAmount = 1
                 } label: {
                     Image(systemName: "arrow.clockwise.circle.fill")
-                        .sensoryFeedback(.selection, trigger: shake) {
+                        .sensoryFeedback(.selection, trigger: diceAmount) {
                             oldValue, newValue in isHaptic
                         }
                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -203,7 +202,7 @@ struct DiceView: View {
             }
             
             Stepper("\(diceAmount)", value: $diceAmount, in: 1...999)
-                .sensoryFeedback(.selection, trigger: shake) {
+                .sensoryFeedback(.selection, trigger: diceAmount) {
                     oldValue, newValue in isHaptic
                 }
                 .frame(maxWidth: .infinity)
@@ -228,7 +227,7 @@ struct DiceView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .foregroundStyle(.gray)
                 }
-                .sensoryFeedback(.selection, trigger: shake) {
+                .sensoryFeedback(.selection, trigger: rollModifier) {
                     oldValue, newValue in isHaptic
                 }
                 .accessibilityIdentifier("rollModifierResetButton")
@@ -240,7 +239,7 @@ struct DiceView: View {
             }
             
             Stepper("\(rollModifier)", value: $rollModifier, in: -999...999)
-                .sensoryFeedback(.selection, trigger: shake) {
+                .sensoryFeedback(.selection, trigger: rollModifier) {
                     oldValue, newValue in isHaptic
                 }
                 .frame(maxWidth: .infinity)
@@ -290,7 +289,7 @@ struct DiceView: View {
                     .accessibilityIdentifier("resultsButton")
             }
         }
-        .sensoryFeedback(.selection, trigger: shake) {
+        .sensoryFeedback(.selection, trigger: resultsSheetIsVisible) {
             oldValue, newValue in isHaptic
         }
         .sheet(
@@ -305,7 +304,7 @@ struct DiceView: View {
                             .accessibilityIdentifier("resultsListInput")
                         
                         ScrollView {
-                            Text("(\(results.map { String($0.content) }.joined(separator: "+")))+\(rollModifier) = \(sum)")
+                            Text("(\(results.map { String($0.value) }.joined(separator: "+")))+\(rollModifier) = \(sum)")
                                 .padding(25)
                                 .accessibilityIdentifier("resultsListOutput")
                         }
@@ -342,9 +341,9 @@ struct DiceView: View {
             resetResults()
             
             for _ in 1...diceAmount {
-                let result = Result(content: generateRandomInt())
+                let result = dice.roll()
                 results.append(result)
-                sum += result.content
+                sum += result.value
             }
             
             sum += rollModifier
@@ -393,7 +392,7 @@ struct DiceView: View {
                 .imageScale(.large)
                 .accessibilityIdentifier("helpButton")
         }
-        .sensoryFeedback(.selection, trigger: shake) {
+        .sensoryFeedback(.selection, trigger: hintsAreVisible) {
             oldValue, newValue in isHaptic
         }
         .popover(
@@ -423,13 +422,13 @@ struct DiceView: View {
     /// - Returns: ``View``
     func diceButton(_ option: Dice) -> some View {
         Button() {
-            diceType = option
+            dice = option
             results.removeAll()
         } label: {
             Text(option.rawValue)
                 .accessibilityIdentifier("\(option)DiceButton")
         }
-        .sensoryFeedback(.selection, trigger: shake) {
+        .sensoryFeedback(.selection, trigger: dice) {
             oldValue, newValue in isHaptic
         }
     }
@@ -445,7 +444,7 @@ struct DiceView: View {
         } label: {
             Text(option.description.capitalized)
         }
-        .sensoryFeedback(.selection, trigger: shake) {
+        .sensoryFeedback(.selection, trigger: primaryColor) {
             oldValue, newValue in isHaptic
         }
         .accessibilityIdentifier("\(option)ColorButton")
@@ -466,7 +465,7 @@ struct DiceView: View {
                 .imageScale(.large)
                 .foregroundStyle(primaryColor)
         }
-        .sensoryFeedback(.selection, trigger: shake) {
+        .sensoryFeedback(.selection, trigger: binding.wrappedValue) {
             oldValue, newValue in isHaptic
         }
         .padding(10)
@@ -495,13 +494,6 @@ struct DiceView: View {
     
     // MARK: Utility Functions
     
-    /// Generates a random integer between 1 and the max value of the currently selected `diceType`.
-    /// - Returns: ``Int``
-    func generateRandomInt() -> Int {
-        let diceValue = Int(diceType.rawValue.replacingOccurrences(of: "d", with: ""))
-        return Int.random(in: 1...diceValue!)
-    }
-    
     /// Clears the `results` array and sets the `sum` of results to zero.
     func resetResults() {
         results.removeAll()
@@ -513,7 +505,7 @@ struct DiceView: View {
     func showInputMessage() -> String {
         "You rolled " +
         String(diceAmount) +
-        diceType.rawValue +
+        dice.rawValue +
         (rollModifier != 0 ? (rollModifier > 0 ? "+" : "") + String(rollModifier) : "")
     }
     
