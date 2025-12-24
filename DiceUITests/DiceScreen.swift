@@ -9,13 +9,13 @@ import SwiftUI
 import XCTest
 
 class DiceScreen {
-    
     // MARK: Elements
     
     let app = XCUIApplication()
     
     private lazy var settingsButton = app.buttons["settingsButton"]
     private lazy var darkModeToggle = app.switches["darkModeToggle"]
+    private lazy var hapticToggle = app.switches["hapticToggle"]
     private lazy var colorMenuButton = app.buttons["colorMenuButton"]
     private lazy var xButtonSettings = app.buttons["xButtonSettings"]
     
@@ -189,6 +189,7 @@ class DiceScreen {
     @discardableResult
     func validateSettingsSheet() -> Self {
         XCTAssertTrue(darkModeToggle.isHittable)
+        XCTAssertTrue(hapticToggle.isHittable)
         XCTAssertTrue(colorMenuButton.isHittable)
         XCTAssertTrue(xButtonSettings.isHittable)
         return self
