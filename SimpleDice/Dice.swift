@@ -1,5 +1,5 @@
 //
-//  DiceModel.swift
+//  Dice.swift
 //  SimpleDice
 //
 //  Created by Chris Allen on 6/23/24.
@@ -16,15 +16,15 @@ enum Dice: String, CaseIterable {
     case d6 = "d6"
     case d4 = "d4"
     
-    /// Generates a random integer between 1 and the max value of the currently selected `Dice`.
-    /// - Returns: ``Int``
-    func roll() -> Int {
-        let diceValue = Int(self.rawValue.replacingOccurrences(of: "d", with: ""))
-        return Int.random(in: 1...diceValue!)
+    struct Result: Identifiable {
+        let id = UUID()
+        let value: Int
     }
-}
-
-struct Result: Identifiable {
-    let id = UUID()
-    let content: Int
+    
+    /// Generates a random integer between 1 and the max value of the currently selected `Dice`.
+    /// - Returns: ``Result``
+    func roll() -> Result {
+        let diceValue = Int(self.rawValue.replacingOccurrences(of: "d", with: "")) ?? 0
+        return Result(value: Int.random(in: 1...diceValue))
+    }
 }
