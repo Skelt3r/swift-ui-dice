@@ -8,13 +8,13 @@
 import SwiftUI
 
 enum Dice: String, CaseIterable {
-    case d100 = "d100"
-    case d20 = "d20"
-    case d12 = "d12"
-    case d10 = "d10"
-    case d8 = "d8"
-    case d6 = "d6"
-    case d4 = "d4"
+    case d100
+    case d20
+    case d12
+    case d10
+    case d8
+    case d6
+    case d4
     
     struct Result: Identifiable {
         let id = UUID()
