@@ -12,30 +12,28 @@ extension Color: @retroactive RawRepresentable {
         guard
             let data = Data(base64Encoded: rawValue)
         else {
-            self = .black
+            self = .red
             return
         }
         
         do {
             self = Color(
-                try NSKeyedUnarchiver
-                    .unarchivedObject(
-                        ofClass: UIColor.self,
-                        from: data
-                    ) ?? .black
+                try NSKeyedUnarchiver.unarchivedObject(
+                    ofClass: UIColor.self,
+                    from: data
+                ) ?? .red
             )
         } catch {
-            self = .black
+            self = .red
         }
     }
     
     public var rawValue: String {
         do {
-            let data = try NSKeyedArchiver
-                .archivedData(
-                    withRootObject: UIColor(self),
-                    requiringSecureCoding: false
-                ) as Data
+            let data = try NSKeyedArchiver.archivedData(
+                withRootObject: UIColor(self),
+                requiringSecureCoding: false
+            ) as Data
             
             return data.base64EncodedString()
             
