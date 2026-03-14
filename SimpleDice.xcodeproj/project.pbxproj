@@ -35,6 +35,7 @@
 		BCB2A4C12C3F75B600111B9A /* DiceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceUITests.swift; sourceTree = "<group>"; };
 		BCB2A4CA2C3F7F9800111B9A /* DiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceScreen.swift; sourceTree = "<group>"; };
 		BCB2A4CE2C4452CB00111B9A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		BCE007232F65EA2F0096DB75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BCE6EFE22C2270030090C606 /* SimpleDice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE6EFE52C2270030090C606 /* DiceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceApp.swift; sourceTree = "<group>"; };
 		BCE6EFE72C2270030090C606 /* DiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceView.swift; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		BCE6EFE42C2270030090C606 /* SimpleDice */ = {
 			isa = PBXGroup;
 			children = (
+				BCE007232F65EA2F0096DB75 /* Info.plist */,
 				BCE6EFE52C2270030090C606 /* DiceApp.swift */,
 				BCE6EFF42C2872640090C606 /* Dice.swift */,
 				BCE6EFE72C2270030090C606 /* DiceView.swift */,
@@ -421,6 +423,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleDice/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.dice-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -463,6 +466,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleDice/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.dice-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
