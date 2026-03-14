@@ -397,7 +397,7 @@ struct DiceView: View {
         }
         .popover(
             isPresented: $hintsAreVisible,
-            attachmentAnchor: .point(.center),
+            attachmentAnchor: .point(.topTrailing),
             arrowEdge: .bottom,
             content: {
                 VStack {
